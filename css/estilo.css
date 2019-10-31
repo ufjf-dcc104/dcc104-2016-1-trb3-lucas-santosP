@@ -1,0 +1,18 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+.cv{
+    position: relative;
+    left: auto;
+    right: auto;
+    border: rgb(141, 141, 141) solid 4px;
+    border-radius: 3px;
+    margin-top: 15px;
+}
+.container{
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #c3c3c3;
+}

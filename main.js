@@ -10,8 +10,9 @@
 
     var assetsMng = new AssetsManager();
     assetsMng.loadImage("player", "assets/imgs/full.png");
-    assetsMng.loadImage("chao_inicial", "assets/imgs/chao_inicial.png");
-    assetsMng.loadImage("chao_final", "assets/imgs/chao_final.png");
+    assetsMng.loadImage("chao_inicial", "assets/imgs/chao2.png");
+    assetsMng.loadImage("chao_final", "assets/imgs/chao1.png");
+    assetsMng.loadImage("chao_extra", "assets/imgs/chao3.png");
     assetsMng.loadImage("parede", "assets/imgs/stone_walls.png");
     assetsMng.loadImage("serra", "assets/imgs/serra.png");
     assetsMng.loadImage("heart", "assets/imgs/Heart.png");
@@ -303,7 +304,7 @@
         }
         restart();
         ctx.drawImage(assetsMng.img("back"), 0, 0, cnv.width, cnv.height);
-        ctx.drawImage(assetsMng.img('titulo'), (cnv.width / 2) - 175, 50, 350, 100);
+        ctx.drawImage(assetsMng.img('titulo'), (cnv.width / 2) - 205, 50, 410, 150);
         ctx.font = "30px arial"; ctx.fillStyle = "white";
         ctx.fillText("CLIQUE PARA COMEÇAR", cnv.width / 2 - 170, 680);
 

@@ -27,7 +27,7 @@ NPC_estatico.prototype.renderCheck = function (dt) {
             0,
             34,
             51,
-            this.x+1.5,
+            this.x+3,
             this.y,
             this.w,
             this.h,
@@ -40,7 +40,7 @@ NPC_estatico.prototype.renderCheck = function (dt) {
             0,
             34,
             51,
-            this.x+1.5,//para centralizar
+            this.x+3,//para centralizar
             this.y,
             this.w,
             this.h,

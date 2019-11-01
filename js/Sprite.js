@@ -1,11 +1,13 @@
 function Sprite(params = {}) {
     var exemplo = {
-        x: 64, y: 64,
-        h: 25, w: 20,
-        vx: 2.3, vy: 2.3,
-        mc: 0, my: 0,
-        assets: null,
+        x: 64,      y: 64,
+        h: 25,      w: 20,
+        vx: 2.3,    vy: 2.3,
+        mc: 0,      my: 0,
+        assets: undefined,
         mapa: undefined,
+        cellsSize:32,
+        ctx: null,
         frame: 0,
         pontos: 0,
         direcao: '',
@@ -15,7 +17,7 @@ function Sprite(params = {}) {
 Sprite.prototype = new Sprite();
 Sprite.prototype.constructor = Sprite;
 
-Sprite.prototype.render = function (ctx, dt) {
+Sprite.prototype.render = function (dt) {
     //Desenhando no chão
     if (this.mapa.cells[this.mc][this.ml].tipo == 0) {
         this.pontos++;
@@ -47,7 +49,7 @@ Sprite.prototype.render = function (ctx, dt) {
             imgY = 0;
             break;
     }
-    ctx.drawImage(
+    this.ctx.drawImage(
         this.assets.img("player"),
         imgX,
         imgY,
@@ -62,8 +64,8 @@ Sprite.prototype.render = function (ctx, dt) {
 
 Sprite.prototype.mover = function (movimento) {
     //Posição do sprite no map
-    this.mc = Math.floor((this.x + (this.w / 2) - 2) / this.mapa.SIZE);
-    this.ml = Math.floor((this.y + (this.h - 5)) / this.mapa.SIZE);
+    this.mc = Math.floor((this.x + (this.w / 2) - 2) / this.cellsSize);
+    this.ml = Math.floor((this.y + (this.h - 5)) / this.cellsSize);
     //Direção da animação
     this.direcao = '';
     //Quando ambos botões são apertados

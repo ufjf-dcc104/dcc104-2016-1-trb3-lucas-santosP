@@ -54,9 +54,10 @@ AssetsManager.prototype.startSound = function (key, volume, loop_cond) {
                 this.channels[i].audio.src = this.audios[key].src;
                 this.channels[i].fim = agora.getTime()+this.audios[key].duration*1000;
 
+                this.channels[i].audio.volume=volume;
                 this.channels[i].audio.play();
                 this.channels[i].audio.loop=loop_cond;
-                this.channels[i].audio.volume=volume;
+                
                 break;
             }
         }
@@ -68,7 +69,6 @@ AssetsManager.prototype.para=function(key){
     this.audios[key].load();
 }
 AssetsManager.prototype.inicia=function(key){
-    
     this.audios[key].play();
     this.audios[key].loop=true;
     this.audios[key].volume=0.5;

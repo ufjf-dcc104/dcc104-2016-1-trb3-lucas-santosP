@@ -4,10 +4,12 @@ function Map(modelo) {
         LINES: 32,
         COLUMNS: 32,
         SIZE: 32,
+        assets: undefined,
         scene: undefined,
+        ctx: null,
         walls: [],
         serrasEstaticas: [],
-        assets: null,
+        
         frame: 0,
         totalPts:0,
     }
@@ -34,7 +36,7 @@ function Map(modelo) {
                     this.totalPts++;
                 }
                 else if(modelo.m[l][c]==3){
-                    this.serrasEstaticas.push(new NPC({ x: c*this.SIZE, y: l*this.SIZE, rotacao:20, assets: this.assets, mapa: this}));
+                    this.serrasEstaticas.push(new NPC({ x: c*this.SIZE, y: l*this.SIZE, rotacao:20, assets: this.assets, mapa: this, ctx: this.ctx}));
                 }
             }
         }
@@ -42,18 +44,18 @@ function Map(modelo) {
     }
 }
 
-Map.prototype.render = function (ctx) {
+Map.prototype.render = function () {
     for (var c = 0; c < this.COLUMNS; c++) {
         for (var l = 0; l < this.LINES; l++) {
 
             switch (this.cells[c][l].tipo) {
                 case 0:
                     //chao inicial
-                    ctx.drawImage(this.assets.img('chao_inicial'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
+                    this.ctx.drawImage(this.assets.img('chao_inicial'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
                     break;
                 case 1:
                     //Paredes
-                    ctx.drawImage(this.assets.img('parede'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE)
+                    this.ctx.drawImage(this.assets.img('parede'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE)
                     break;
                 case 2:
                     //Chao final
@@ -61,10 +63,10 @@ Map.prototype.render = function (ctx) {
                     break;
                 case 3:
                     //Chao atras de serras estaticas
-                    ctx.drawImage(this.assets.img('chao_inicial'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
-                    ctx.globalAlpha = 0.4; 
-                    ctx.drawImage(this.assets.img('parede'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
-                    ctx.globalAlpha = 1; 
+                    this.ctx.drawImage(this.assets.img('chao_inicial'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
+                    this.ctx.globalAlpha = 0.4; 
+                    this.ctx.drawImage(this.assets.img('parede'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
+                    this.ctx.globalAlpha = 1; 
                     break;
                 default:
                     break;
@@ -74,17 +76,17 @@ Map.prototype.render = function (ctx) {
     }
 }
 
-Map.prototype.clearMap = function (ctx) {
+Map.prototype.clearMap = function () {
     for (var c = 0; c < this.COLUMNS; c++) {
         for (var l = 0; l < this.LINES; l++) {
             //Obstaculos   
             if (this.cells[c][l].tipo == 1) {
-                ctx.drawImage(this.assets.img('parede'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE)
+                this.ctx.drawImage(this.assets.img('parede'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE)
             }
             //chao_inicial
             else if (this.cells[c][l].tipo == 0 || this.cells[c][l].tipo == 2) {
                 this.cells[c][l].tipo = 0;
-                ctx.drawImage(this.assets.img('chao_inicial'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
+                this.ctx.drawImage(this.assets.img('chao_inicial'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
             }
         }
     }

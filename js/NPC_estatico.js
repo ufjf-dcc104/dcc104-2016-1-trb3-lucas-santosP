@@ -2,10 +2,11 @@ function NPC_estatico(params = {}) {
     var exemplo = {
         x: 0, y: 0,
         h: 32, w: 32,
-        vx: 3, vy: 3,
+        vx: 0, vy: 0,
         mc: 0, my: 0,
-        assets: null,
+        assets: undefined,
         mapa: undefined,
+        ctx: null,
         frame: 0,
         ativo: false,
     }
@@ -14,14 +15,13 @@ function NPC_estatico(params = {}) {
 NPC_estatico.prototype = new NPC_estatico();
 NPC_estatico.prototype.constructor = NPC_estatico;
 
-NPC_estatico.prototype.render = function (ctx, dt) {
+NPC_estatico.prototype.renderCheck = function (dt) {
     this.mc = Math.floor((this.x + (this.w / 2)) / this.mapa.SIZE);
     this.ml = Math.floor((this.y + (this.h / 2)) / this.mapa.SIZE);
     this.frame += 12 * dt;
-    ctx.save();
 
     if(this.ativo){
-        ctx.drawImage(
+        this.ctx.drawImage(
             this.assets.img("cp_ativo"),
             0,
             0,
@@ -29,12 +29,12 @@ NPC_estatico.prototype.render = function (ctx, dt) {
             51,
             this.x+1.5,
             this.y,
-            28,
-            32,
+            this.w,
+            this.h,
         );
     }
     else{
-        ctx.drawImage(
+        this.ctx.drawImage(
             this.assets.img("cp_desligado"),
             0,
             0,
@@ -42,17 +42,17 @@ NPC_estatico.prototype.render = function (ctx, dt) {
             51,
             this.x+1.5,//para centralizar
             this.y,
-            28,
-            32,
+            this.w,
+            this.h,
         );
     }
 }
 
-NPC_estatico.prototype.render2 = function (ctx, dt) {
+NPC_estatico.prototype.renderDeath = function (dt) {
     this.frame += 10 * dt;
     var F = Math.floor(this.frame);
-    ctx.save();
-    ctx.drawImage(
+    this.ctx.save();
+    this.ctx.drawImage(
         this.assets.img("death"),
         (F%5)*20,
         0,
@@ -62,6 +62,22 @@ NPC_estatico.prototype.render2 = function (ctx, dt) {
         this.y,
         20,
         23,
+    );
+}
+
+NPC_estatico.prototype.renderHeart = function (dt) {
+    this.frame += 50 * dt;
+    var F = Math.floor(this.frame);
+    this.ctx.drawImage(
+        this.assets.img("heart"),
+        0,
+        0,
+        32,
+        32,
+        this.x,
+        this.y,
+        this.w,
+        this.h,
     );
 }
 

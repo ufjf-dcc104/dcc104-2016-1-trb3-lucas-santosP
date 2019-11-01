@@ -3,12 +3,15 @@ function NPC(params = {}) {
         x: 0, y: 0,
         h: 32, w: 32,
         vx: 3, vy: 3,
+        cellsSize:32,
         mc: 0, my: 0,
-        assets: null,
+        assets: undefined,
         mapa: undefined,
+        ctx: null,
         frame: 0,
         cond: true,
         rotacao: 50,
+        
         direcao: 'direita',
     }
     Object.assign(this, exemplo, params);
@@ -16,11 +19,10 @@ function NPC(params = {}) {
 NPC.prototype = new NPC();
 NPC.prototype.constructor = NPC;
 
-NPC.prototype.render = function (ctx, dt) {
-
+NPC.prototype.render = function (dt) {
     this.frame += this.rotacao * dt;
     var F = Math.floor(this.frame);
-    ctx.drawImage(
+    this.ctx.drawImage(
         this.assets.img("serra"),
         (F % 3) * 124,
         0,
@@ -33,32 +35,16 @@ NPC.prototype.render = function (ctx, dt) {
     );
 };
 
-NPC.prototype.render2 = function (ctx, dt) {
-    this.frame += 50 * dt;
-    var F = Math.floor(this.frame);
-    ctx.drawImage(
-        this.assets.img("heart"),
-        0,
-        0,
-        32,
-        32,
-        this.x,
-        this.y,
-        this.w,
-        this.h,
-    );
-}
-
 NPC.prototype.mover = function () {
     //Posição do NPC no map
-    this.mc = Math.floor((this.x + (this.w / 2)) / this.mapa.SIZE);
-    this.ml = Math.floor((this.y + (this.h / 2)) / this.mapa.SIZE);
+    this.mc = Math.floor((this.x + (this.w / 2)) / this.cellsSize);
+    this.ml = Math.floor((this.y + (this.h / 2)) / this.cellsSize);
 
-    var debaixo = Math.floor(this.y / this.mapa.SIZE);
-    var decima = Math.floor((this.y + (this.h)) / this.mapa.SIZE);
+    var debaixo = Math.floor(this.y / this.cellsSize);
+    var decima = Math.floor((this.y + (this.h)) / this.cellsSize);
 
-    var direita = Math.floor((this.x) / this.mapa.SIZE);
-    var esquerda = Math.floor((this.x + (this.w)) / this.mapa.SIZE);
+    var direita = Math.floor((this.x) / this.cellsSize);
+    var esquerda = Math.floor((this.x + (this.w)) / this.cellsSize);
 
     if (this.direcao == 'y') {
         //CIMA
@@ -107,14 +93,14 @@ NPC.prototype.colidiuCom = function (alvo) {
 
 NPC.prototype.moverCircular = function () {
     //Posição do NPC no map
-    this.mc = Math.floor((this.x + (this.w / 2)) / this.mapa.SIZE);
-    this.ml = Math.floor((this.y + (this.h / 2)) / this.mapa.SIZE);
+    this.mc = Math.floor((this.x + (this.w / 2)) / this.cellsSize);
+    this.ml = Math.floor((this.y + (this.h / 2)) / this.cellsSize);
 
-    var debaixo = Math.floor(this.y / this.mapa.SIZE);
-    var decima = Math.floor((this.y + (this.h)) / this.mapa.SIZE);
+    var debaixo = Math.floor(this.y / this.cellsSize);
+    var decima = Math.floor((this.y + (this.h)) / this.cellsSize);
 
-    var direita = Math.floor((this.x + 1) / this.mapa.SIZE);
-    var esquerda = Math.floor((this.x + this.w - 1) / this.mapa.SIZE);
+    var direita = Math.floor((this.x + 1) / this.cellsSize);
+    var esquerda = Math.floor((this.x + this.w - 1) / this.cellsSize);
 
     switch (this.direcao) {
         case 'direita':

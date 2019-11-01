@@ -18,15 +18,21 @@
     assetsMng.loadImage("cp_ativo", "assets/imgs/check-ativo.png");
     assetsMng.loadImage("cp_desligado", "assets/imgs/check-desligado.png");
     assetsMng.loadImage("death", "assets/imgs/fullexp.png");
+    assetsMng.loadImage("back", "assets/imgs/background.png");
+    assetsMng.loadImage("titulo", "assets/imgs/titulo.png");
     //HUD
     assetsMng.loadImage("vida3", "assets/imgs/HUD/3.png");
     assetsMng.loadImage("vida2", "assets/imgs/HUD/2.png");
     assetsMng.loadImage("vida1", "assets/imgs/HUD/1.png");
     assetsMng.loadImage("vida0", "assets/imgs/HUD/0.png");
     //audios
-    assetsMng.loadAudio("OST", "assets/sounds/OST.mp3");
+    //assetsMng.loadAudio("OST", "assets/sounds/OST.mp3");
     assetsMng.loadAudio("pickSound", "assets/sounds/pick.mp3");
     assetsMng.loadAudio("hitSound", "assets/sounds/death-sound-effect.mp3");
+
+    var ost = new Audio('assets/sounds/OST.mp3');
+    
+
 
     var cellSize = 32;
     var mapa = new Map({
@@ -61,84 +67,89 @@
         ]
     });
 
-    var pc = new Sprite({ assets: assetsMng, mapa: mapa });
+    var pc = new Sprite({ x: 32 + 8, y: 32, assets: assetsMng, mapa: mapa, ctx: ctx });
 
     var serras = [];
-    serras.push(new NPC({ x: cellSize * 1, y: 19 * cellSize, direcao: 'y', vy: 2, assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 18, y: 5 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 18, y: 3 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 18, y: 7 * cellSize, direcao: 'x', vx: 3.5, assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 13, y: 1 * cellSize, direcao: 'y', vy: 2, assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 2, y: 6 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 1, y: 4 * cellSize, direcao: 'x', vx: 1.2, assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 8, y: 5 * cellSize, direcao: 'y', vy: 1, assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 1, y: 9 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 11, y: 5 * cellSize, direcao: 'y', vy: 2, assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 11, y: 3 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 23, y: 3 * cellSize, direcao: 'y', vy: 1.2, assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 23, y: 6 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 28, y: 6 * cellSize, direcao: 'y', vy: 2.3, assets: assetsMng, mapa: mapa }));
-    serras.push(new NPC({ x: cellSize * 25, y: 10 * cellSize, direcao: 'y', vy: 3.5, assets: assetsMng, mapa: mapa }));
+    serras.push(new NPC({ x: cellSize * 1, y: 19 * cellSize, direcao: 'y', vy: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 18, y: 5 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 18, y: 3 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 18, y: 7 * cellSize, direcao: 'x', vx: 3.5, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 13, y: 1 * cellSize, direcao: 'y', vy: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 2, y: 6 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 1, y: 4 * cellSize, direcao: 'x', vx: 1.2, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 8, y: 5 * cellSize, direcao: 'y', vy: 1, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 1, y: 9 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 11, y: 5 * cellSize, direcao: 'y', vy: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 11, y: 3 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 23, y: 3 * cellSize, direcao: 'y', vy: 1.2, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 23, y: 6 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 28, y: 6 * cellSize, direcao: 'y', vy: 2.3, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 25, y: 10 * cellSize, direcao: 'y', vy: 3.5, assets: assetsMng, mapa: mapa, ctx: ctx }));
 
     var serrasCirulares = [];
-    serrasCirulares.push(new NPC({ x: cellSize * 25, y: 1 * cellSize, vx: 3.8, vy: 3.8, assets: assetsMng, mapa: mapa }));
-    serrasCirulares.push(new NPC({ x: cellSize * 9, y: 15 * cellSize, vx: 3.3, vy: 3.3, assets: assetsMng, mapa: mapa }));
-    serrasCirulares.push(new NPC({ x: cellSize * 9, y: 9 * cellSize, vx: 3, vy: 3, assets: assetsMng, mapa: mapa }));
-    serrasCirulares.push(new NPC({ x: cellSize * 5, y: 11 * cellSize, vx: 3.4, vy: 3.4, assets: assetsMng, mapa: mapa }));
-
-    var coracoes = [];
-    coracoes.push(new NPC({ x: cellSize * 11, y: 20 * cellSize, vx: 0, vy: 0, assets: assetsMng, mapa: mapa }));
-    coracoes.push(new NPC({ x: cellSize * 13, y: 6 * cellSize, vx: 0, vy: 0, assets: assetsMng, mapa: mapa }));
-    coracoes.push(new NPC({ x: cellSize * 2, y: 11 * cellSize, vx: 0, vy: 0, assets: assetsMng, mapa: mapa }));
+    serrasCirulares.push(new NPC({ x: cellSize * 25, y: 1 * cellSize, vx: 3.8, vy: 3.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serrasCirulares.push(new NPC({ x: cellSize * 9, y: 15 * cellSize, vx: 3.3, vy: 3.3, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serrasCirulares.push(new NPC({ x: cellSize * 9, y: 9 * cellSize, vx: 3, vy: 3, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serrasCirulares.push(new NPC({ x: cellSize * 5, y: 11 * cellSize, vx: 3.4, vy: 3.4, assets: assetsMng, mapa: mapa, ctx: ctx }));
 
     var checkPoints = [];
-    checkPoints.push(new NPC_estatico({ x: cellSize * 20, y: 11 * cellSize, vx: 0, vy: 0, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    checkPoints.push(new NPC_estatico({ x: cellSize * 8, y: 19 * cellSize, vx: 0, vy: 0, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    checkPoints.push(new NPC_estatico({ x: cellSize * 21, y: 5 * cellSize, vx: 0, vy: 0, assets: assetsMng, mapa: mapa, ctx: ctx }));
 
-    var explosao = new NPC_estatico({ x: cellSize * 21, y: 5 * cellSize, vx: 0, vy: 0, assets: assetsMng, mapa: mapa, ctx: ctx });
+    checkPoints.push(new NPC_estatico({ x: cellSize * 20, y: 11 * cellSize, w: 28, h: 32, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    checkPoints.push(new NPC_estatico({ x: cellSize * 8, y: 19 * cellSize, w: 28, h: 32, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    checkPoints.push(new NPC_estatico({ x: cellSize * 21, y: 5 * cellSize, w: 28, h: 32, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    var coracoes = [];
 
+    var explosao = new NPC_estatico({ x: cellSize * 21, y: 5 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx });
+
+    var checkMenu1 = new NPC_estatico({ x: 50, y: 460, w: 70, h: 90, ativo: true, assets: assetsMng, mapa: mapa, ctx: ctx });
+    var checkMenu2 = new NPC_estatico({ x: 840, y: 460, w: 70, h: 90, ativo: true, assets: assetsMng, mapa: mapa, ctx: ctx });
+    
     var dt = 0; var anterior = 0;
-    var alive; var vidas = 3;
-    var hit = false; var recorde = 0;
+    var alive; var hit = false;
+    var vidas; var recorde = 0;
+    var jogando = false;
+    var tocandoOST=false;
+    var playPromise;
     const totalPontos = mapa.totalPts;
+    //Posição do respawn do pc
     var posicao_x = 1 * cellSize;
     var posicao_y = 1 * cellSize;
 
     //MAIN ================================================================================================
-    desenha_menu_inicial();
+    requestAnimationFrame(loop);
 
     //FUNÇÕES PRINCIPAIS
     function loop(t) {
         dt = (t - anterior) / 1000;
         anterior = t;
-        //Se morrer 3 vezes
-        if (vidas == 0) {
-            gameOver();
+
+        if (!jogando) {
+            desenha_menu_inicial();
         }
-        //Se esta vivo
-        else if (alive) {
-            //Se chegou ao fim do jogo
-            if (pc.pontos == totalPontos) {
-                venceu();
+        else {
+            if (vidas == 0) { //Se acabou as vidas
+                gameOver();
             }
-            else {
-                update(dt);
-                render(dt);
-                requestAnimationFrame(loop);
+            else if (alive) { //Se esta vivo, roda o jogo
+                //Se chegou ao fim do jogo
+                if (pc.pontos == totalPontos) {
+                    venceu();
+                }
+                else {
+                    update(dt);
+                    render(dt);
+                }
+            }
+            else { //Se for acertado chama respawn
+                assetsMng.startSound("hitSound", 0.2, false);
+                hit = true;
+                explosao.x = pc.x;
+                explosao.y = pc.y;
+                window.setTimeout(function () { hit = false; vidas--; }, 1300);    //Tempo para animação da morte.
+                respawn();
             }
         }
-        else {//Se for acertado
-            assetsMng.startSound("hitSound", 0.2, false);
-            hit = true;
-            explosao.x = pc.x;
-            explosao.y = pc.y;
-            window.setTimeout(function () { //Tempo para animação da morte.
-                hit = false;
-                vidas--;
-            }, 1300);
-            respawn();
-        }
+        requestAnimationFrame(loop);
     }
 
     function update() {
@@ -150,7 +161,7 @@
             pc.colisaoMap(parede);
             parede = null;
         }
-        /*
+
         for (const i in mapa.serrasEstaticas) { //colisão da serra estatica
             if (mapa.serrasEstaticas[i].colidiuCom(pc)) {
                 alive = false;
@@ -181,36 +192,34 @@
                 checkPoints[i].ativo = true;
                 posicao_y = checkPoints[i].y;
                 posicao_x = checkPoints[i].x;
-            };
+            }
         }
-        */
     }
 
     function render() {
         ctx.clearRect(0, 0, cnv.width, cnv.height);
-        mapa.render(ctx);
-        /*
+        mapa.render();
+
         for (const i in checkPoints) {  //Desenha checkPoints
-            checkPoints[i].render(ctx, dt);
+            checkPoints[i].renderCheck(dt);
         }
         for (const i in mapa.serrasEstaticas) { //Desenha serras estaticas
-            mapa.serrasEstaticas[i].render(ctx, dt);
+            mapa.serrasEstaticas[i].render(dt);
         }
         for (const i in coracoes) { //Desenha corações
-            coracoes[i].render2(ctx, dt);
+            coracoes[i].renderHeart(dt);
         }
         for (const i in serras) { //Desenha serras
-            serras[i].render(ctx, dt);
+            serras[i].render(dt);
         }
         for (const i in serrasCirulares) { //Desenha serras circulares
-            serrasCirulares[i].render(ctx, dt);
+            serrasCirulares[i].render(dt);
         }
-        */
         if (hit) { //Se for acertado desenha explosao
-            explosao.render2(ctx, dt);
+            explosao.renderDeath(dt);
         }
         else { //Se não desenha o sprite normalmente
-            pc.render(ctx, dt);
+            pc.render(dt);
         }
         desenhaHUD();
     }
@@ -220,14 +229,15 @@
         alive = true;
         pc.x = posicao_x + 6;
         pc.y = posicao_y;
-        requestAnimationFrame(loop);
     }
 
     function restart() { //Volta todas variaveis (necessarias) para o estado inicial do jogo.
         //assetsMng.inicia("OST");
         alive = true;
         vidas = 3;
-        mapa.clearMap(ctx);  //Apaga partes pintadas de verde
+        //Se andou no mapa
+        if (pc.pontos > 1)
+            mapa.clearMap();  //Apaga partes pintadas de verde
 
         pc.x = cellSize + 6;
         pc.y = cellSize;
@@ -238,16 +248,18 @@
         for (const i in checkPoints) {
             checkPoints[i].ativo = false;
         }
-        requestAnimationFrame(loop);
+        coracoes.push(new NPC_estatico({ x: cellSize * 11, y: 20 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx }));
+        coracoes.push(new NPC_estatico({ x: cellSize * 13, y: 6 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx }));
+        coracoes.push(new NPC_estatico({ x: cellSize * 2, y: 11 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx }));
     }
+
 
     function gameOver() {
         //assetsMng.para("OST");
-        ctx.globalAlpha = 0.6;
+        ctx.globalAlpha = 0.2;
         ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, cnv.width, cnv.height);
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, cnv.height / 2 - 140, cnv.width, 150);
+        ctx.fillRect(32, 32, cnv.width - 64, cnv.height - 64);
+
         ctx.globalAlpha = 1.0;
         ctx.fillStyle = "darkred";
         ctx.font = "100px bold sans-serif";
@@ -260,15 +272,16 @@
             ctx.fillText("NOVO RECORDE: " + recorde + " pontos", (cnv.width / 2) - 210, (cnv.height / 2) + 250);
         }
         else {
-            ctx.fillText("RECORDE: " + recorde + " pontos", (cnv.width / 2) - 160, (cnv.height / 2) + 250);
+            ctx.fillText("RECORDE: " + recorde + " pontos", (cnv.width / 2) - 140, (cnv.height / 2) + 250);
         }
 
-        ctx.font = "50px bold roboto"; ctx.lineWidth = 2;
-        ctx.strokeStyle = "white"; ctx.fillStyle = 'blue';
-        ctx.fillRect((cnv.width / 2) - 110, (cnv.height / 2) + 50, 200, 50);
-        ctx.strokeRect((cnv.width / 2) - 110, (cnv.height / 2) + 50, 200, 50);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "white"; ctx.fillStyle = 'red';
+        ctx.fillRect((cnv.width / 2) - 90, (cnv.height / 2) + 80, 180, 40);
+        ctx.strokeRect((cnv.width / 2) - 90, (cnv.height / 2) + 80, 180, 40);
         ctx.fillStyle = "white";
-        ctx.fillText("PLAY", (cnv.width / 2) - 70, (cnv.height / 2) + 90);
+        ctx.font = "40px arial  ";
+        ctx.fillText("PLAY", (cnv.width / 2) - 50, (cnv.height / 2) + 115);
         desenhaHUD();
         document.querySelector('canvas').addEventListener("click", function _listener() {
             document.querySelector('canvas').removeEventListener("click", _listener, true);
@@ -276,33 +289,36 @@
         }, true);
     }
     //DESENHA MENU INICIAL
+
     function desenha_menu_inicial() {
-        //assetsMng.inicia("OST");
-        ctx.globalAlpha = 0.5; ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, cnv.width, cnv.height);
-
-        ctx.fillStyle = "black"; ctx.globalAlpha = 0.5;
-        ctx.fillRect(0, 0, cnv.width, 150);
-        ctx.fillRect(0, 380, cnv.width, 150);
-
-
-        ctx.globalAlpha = 1.0;
-        ctx.fillStyle = "white"; ctx.font = "100px monospaced";
-        ctx.fillText("SAWS", cnv.width / 2 - 140, 100);
-
+        if(tocandoOST){
+            playPromise = ost.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                ost.play();
+                tocandoOST=true;
+            });
+        }
+        }
+        restart();
+        ctx.drawImage(assetsMng.img("back"), 0, 0, cnv.width, cnv.height);
+        ctx.drawImage(assetsMng.img('titulo'), (cnv.width / 2) - 175, 50, 350, 100);
         ctx.font = "30px arial"; ctx.fillStyle = "white";
-        ctx.fillText("CLIQUE PARA COMEÇAR", cnv.width / 2 - 170, 500);
+        ctx.fillText("CLIQUE PARA COMEÇAR", cnv.width / 2 - 170, 680);
 
-        ctx.font = "50px bold roboto"; ctx.lineWidth = 2;
+        ctx.lineWidth = 2;
         ctx.strokeStyle = "white"; ctx.fillStyle = 'blue';
-        ctx.fillRect((cnv.width / 2) - 110, (cnv.height / 2) + 50, 200, 50);
-        ctx.strokeRect((cnv.width / 2) - 110, (cnv.height / 2) + 50, 200, 50);
+        ctx.fillRect((cnv.width / 2) - 90, (cnv.height / 2) + 230, 180, 40);
+        ctx.strokeRect((cnv.width / 2) - 90, (cnv.height / 2) + 230, 180, 40);
         ctx.fillStyle = "white";
-        ctx.fillText("PLAY", (cnv.width / 2) - 70, (cnv.height / 2) + 90);
-
+        ctx.font = "40px arial  ";
+        ctx.fillText("PLAY", (cnv.width / 2) - 50, (cnv.height / 2) + 265);
+        checkMenu1.renderCheck(dt);
+        checkMenu2.renderCheck(dt);
         document.querySelector('canvas').addEventListener("click", function _listener() {
             document.querySelector('canvas').removeEventListener("click", _listener, true);
-            respawn();
+            jogando = true;
         }, true);
     }
     //Se juntou todos os pontos
@@ -340,6 +356,7 @@
             document.querySelector('canvas').removeEventListener("click", _listener, true);
             restart();
         }, true);
+
     }
     //Desenha HUD
     function desenhaHUD() {

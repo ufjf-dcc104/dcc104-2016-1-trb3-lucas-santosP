@@ -94,6 +94,7 @@
     var recorde = 0;
     var jogando = false;
     var playPromise;
+    var tocandoOST; //Variavel para garantir que a ost é tocando um por vez
     const totalPontos = mapa.totalPts;
     //Posição do respawn do pc
     var posicao_x = 1 * cellSize;
@@ -224,8 +225,7 @@
     }
 
     function restart() { //Volta todas variaveis (necessarias) para o estado inicial do jogo.
-
-        window.setTimeout(function () { playOST(mainOST); }, 100);//Toca OST apos alguns segundos para garantir que carregou
+        window.setTimeout(function () { playOST(mainOST); }, 100); 
         vidas = 3;
         pontos = 0;
         for (const i in pc.caminhos) {//Apaga partes pintadas do mapa
@@ -369,11 +369,12 @@
 
     function playOST(ost) {
         playPromise = ost.play();
-        if (playPromise !== undefined) {
+        if (playPromise !== undefined && !tocandoOST) {
             playPromise.then(_ => {
                 ost.play();
                 ost.volume = 0.1;
                 ost.loop = true;
+                tocandoOST=true;
             });
         }
 
@@ -381,6 +382,7 @@
     function pauseOST(ost) {
         ost.pause();
         ost.load();
+        tocandoOST=false;
     }
 
     //CONTROLES

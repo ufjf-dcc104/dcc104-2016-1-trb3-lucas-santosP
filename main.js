@@ -78,7 +78,6 @@
     serrasCirulares.push(new NPC({ x: cellSize * 5, y: 11 * cellSize, vx: 3.4, vy: 3.4, assets: assetsMng, mapa: mapa, ctx: ctx }));
 
     var checkPoints = [];
-
     checkPoints.push(new NPC_estatico({ x: cellSize * 20, y: 11 * cellSize, w: 28, h: 32, assets: assetsMng, mapa: mapa, ctx: ctx }));
     checkPoints.push(new NPC_estatico({ x: cellSize * 8, y: 19 * cellSize, w: 28, h: 32, assets: assetsMng, mapa: mapa, ctx: ctx }));
     checkPoints.push(new NPC_estatico({ x: cellSize * 21, y: 5 * cellSize, w: 28, h: 32, assets: assetsMng, mapa: mapa, ctx: ctx }));
@@ -99,7 +98,7 @@
     //Posição do respawn do pc
     var posicao_x = 1 * cellSize;
     var posicao_y = 1 * cellSize;
-
+    
     //MAIN ================================================================================================
     restart();  //Inicializa variaveis
     requestAnimationFrame(loop);
@@ -110,7 +109,6 @@
         anterior = t;
 
         if (!jogando) {
-
             desenha_menu_inicial();
         }
         else {
@@ -226,7 +224,8 @@
     }
 
     function restart() { //Volta todas variaveis (necessarias) para o estado inicial do jogo.
-        playOST(mainOST);
+
+        window.setTimeout(function () { playOST(mainOST); }, 100);//Toca OST apos alguns segundos para garantir que carregou
         vidas = 3;
         pontos = 0;
         for (const i in pc.caminhos) {//Apaga partes pintadas do mapa
@@ -375,7 +374,6 @@
                 ost.play();
                 ost.volume = 0.1;
                 ost.loop = true;
-
             });
         }
 

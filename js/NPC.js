@@ -3,15 +3,13 @@ function NPC(params = {}) {
         x: 0, y: 0,
         h: 32, w: 32,
         vx: 3, vy: 3,
-        cellsSize:32,
-        mc: 0, my: 0,
+        cellsSize: 32,
         assets: undefined,
         mapa: undefined,
         ctx: null,
         frame: 0,
         cond: true,
         rotacao: 50,
-        
         direcao: 'direita',
     }
     Object.assign(this, exemplo, params);
@@ -24,7 +22,7 @@ NPC.prototype.render = function (dt) {
     var F = Math.floor(this.frame);
     this.ctx.drawImage(
         this.assets.img("pack"),
-        110+(F%3) * 36,
+        110 + (F % 3) * 36,
         82,
         38,
         36,

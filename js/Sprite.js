@@ -10,7 +10,6 @@ function Sprite(params = {}) {
         cellsSize:32,
         ctx: null,
         frame: 0,
-        pontos: 0,
         direcao: '',
     }
     Object.assign(this, exemplo, params);
@@ -40,7 +39,7 @@ Sprite.prototype.render = function (dt) {
             break;
 
         case 'cima':
-            imgY = 218;
+            imgY = 216;
             break;
 
         case 'baixo':

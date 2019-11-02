@@ -98,7 +98,7 @@
     //Posição do respawn do pc
     var posicao_x = 1 * cellSize;
     var posicao_y = 1 * cellSize;
-    
+
     //MAIN ================================================================================================
     restart();  //Inicializa variaveis
     requestAnimationFrame(loop);
@@ -230,6 +230,7 @@
             mapa.clearMap(pc.caminhos[i]);
         }
         pc.caminhos.length = 0;
+
         for (const i in checkPoints) {
             checkPoints[i].ativo = false;
         }
@@ -260,7 +261,7 @@
             recorde = pontos;
         }
         ctx.fillText("RECORDE: " + recorde + " pontos", (cnv.width / 2) - 140, (cnv.height / 2) + 250);
-        
+
 
         ctx.lineWidth = 2;
         ctx.strokeStyle = "white"; ctx.fillStyle = 'red';
@@ -361,10 +362,14 @@
                 break;
         }
         ctx.drawImage(assetsMng.img("pack"),
-            110, heart_Y,//posição na img
-            54, 17,     //corte
-            5, 4,      //posição no cnv
-            54, 17,
+            110,
+            heart_Y,
+            54,
+            17,
+            5,
+            4,
+            54,
+            17,
         );
     }
 

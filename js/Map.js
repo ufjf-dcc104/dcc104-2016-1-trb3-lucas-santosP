@@ -8,10 +8,10 @@ function Map(modelo) {
         scene: undefined,
         ctx: null,
         walls: [],
-        serrasEstaticas: [],
-        
+        spikes: [],
+
         frame: 0,
-        totalPts:0,
+        totalPts: 0,
     }
     Object.assign(this, exemplo, modelo);
 
@@ -32,11 +32,11 @@ function Map(modelo) {
                     };
                     this.walls.push(parede);
                 }
-                else if(modelo.m[l][c]==0){
+                else if (modelo.m[l][c] == 0) {
                     this.totalPts++;
                 }
-                else if(modelo.m[l][c]==3){
-                    this.serrasEstaticas.push(new NPC({ x: c*this.SIZE, y: l*this.SIZE, rotacao:20, assets: this.assets, mapa: this, ctx: this.ctx}));
+                else if (modelo.m[l][c] == 3) {
+                    this.spikes.push(new NPC({ x: c * this.SIZE, y: l * this.SIZE, rotacao: 20, assets: this.assets, mapa: this, ctx: this.ctx }));
                 }
             }
         }
@@ -55,39 +55,38 @@ Map.prototype.render = function () {
                     break;
                 case 1:
                     //Paredes
-                    this.ctx.drawImage(this.assets.img('parede'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE)
+                    this.ctx.drawImage(this.assets.img("pack"),
+                        0, 82,    //posição na img
+                        //corte
+                        48, 47,
+                        //posição no cnv
+                        c * this.SIZE,
+                        l * this.SIZE,
+                        32, 32,
+                    );
                     break;
                 case 2:
                     //Chao final
                     this.ctx.drawImage(this.assets.img('chao_final'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
                     break;
                 case 3:
-                    //Chao atras de serras estaticas
-                    this.ctx.drawImage(this.assets.img('chao_inicial'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
-                    this.ctx.globalAlpha = 0.4; 
-                    this.ctx.drawImage(this.assets.img('parede'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
-                    this.ctx.globalAlpha = 1; 
+                    this.ctx.drawImage(this.assets.img('chao_final'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
+                    this.ctx.drawImage(this.assets.img("pack"),
+                        48, 82,    //posição na img
+                        //corte
+                        50, 50,
+                        //posição no cnv
+                        c * this.SIZE,
+                        l * this.SIZE,
+                        32, 32,
+                    );
                     break;
                 default:
                     break;
             }
-            
         }
     }
 }
-
-Map.prototype.clearMap = function () {
-    for (var c = 0; c < this.COLUMNS; c++) {
-        for (var l = 0; l < this.LINES; l++) {
-            //Obstaculos   
-            if (this.cells[c][l].tipo == 1) {
-                this.ctx.drawImage(this.assets.img('parede'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE)
-            }
-            //chao_inicial
-            else if (this.cells[c][l].tipo == 0 || this.cells[c][l].tipo == 2) {
-                this.cells[c][l].tipo = 0;
-                this.ctx.drawImage(this.assets.img('chao_inicial'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
-            }
-        }
-    }
+Map.prototype.clearMap = function (caminho) {
+    this.cells[caminho.c][caminho.l].tipo = 0;
 }

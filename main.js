@@ -9,31 +9,15 @@
     };
 
     var assetsMng = new AssetsManager();
-    assetsMng.loadImage("player", "assets/imgs/full.png");
-    assetsMng.loadImage("chao_inicial", "assets/imgs/chao2.png");
-    assetsMng.loadImage("chao_final", "assets/imgs/chao1.png");
-    assetsMng.loadImage("chao_extra", "assets/imgs/chao3.png");
-    assetsMng.loadImage("parede", "assets/imgs/stone_walls.png");
-    assetsMng.loadImage("serra", "assets/imgs/serra.png");
-    assetsMng.loadImage("heart", "assets/imgs/Heart.png");
-    assetsMng.loadImage("cp_ativo", "assets/imgs/check-ativo.png");
-    assetsMng.loadImage("cp_desligado", "assets/imgs/check-desligado.png");
-    assetsMng.loadImage("death", "assets/imgs/fullexp.png");
-    assetsMng.loadImage("back", "assets/imgs/background.png");
-    assetsMng.loadImage("titulo", "assets/imgs/titulo.png");
-    //HUD
-    assetsMng.loadImage("vida3", "assets/imgs/HUD/3.png");
-    assetsMng.loadImage("vida2", "assets/imgs/HUD/2.png");
-    assetsMng.loadImage("vida1", "assets/imgs/HUD/1.png");
-    assetsMng.loadImage("vida0", "assets/imgs/HUD/0.png");
+    assetsMng.loadImage("chao_inicial", "assets/imgs/chao1.png");
+    assetsMng.loadImage("chao_final", "assets/imgs/chao2.png");
+    assetsMng.loadImage("background", "assets/imgs/background.png");
+    assetsMng.loadImage("pack", "assets/imgs/all_imgs.png");
     //audios
-    //assetsMng.loadAudio("OST", "assets/sounds/OST.mp3");
     assetsMng.loadAudio("pickSound", "assets/sounds/pick.mp3");
     assetsMng.loadAudio("hitSound", "assets/sounds/death-sound-effect.mp3");
-
-    var ost = new Audio('assets/sounds/OST.mp3');
-    
-
+    assetsMng.loadAudio("checkSound", "assets/sounds/checkpointSound.mp3");
+    var mainOST = new Audio('assets/sounds/OST.mp3');
 
     var cellSize = 32;
     var mapa = new Map({
@@ -102,14 +86,14 @@
 
     var explosao = new NPC_estatico({ x: cellSize * 21, y: 5 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx });
 
-    var checkMenu1 = new NPC_estatico({ x: 50, y: 460, w: 70, h: 90, ativo: true, assets: assetsMng, mapa: mapa, ctx: ctx });
-    var checkMenu2 = new NPC_estatico({ x: 840, y: 460, w: 70, h: 90, ativo: true, assets: assetsMng, mapa: mapa, ctx: ctx });
-    
+    var checkMenu1 = new NPC_estatico({ x: 50, y: 465, w: 90, h: 90, ativo: true, assets: assetsMng, mapa: mapa, ctx: ctx });
+    var checkMenu2 = new NPC_estatico({ x: 840, y: 465, w: 90, h: 90, ativo: true, assets: assetsMng, mapa: mapa, ctx: ctx });
+
     var dt = 0; var anterior = 0;
     var alive; var hit = false;
-    var vidas; var recorde = 0;
+    var vidas; var pontos;
+    var recorde = 0;
     var jogando = false;
-    var tocandoOST=false;
     var playPromise;
     const totalPontos = mapa.totalPts;
     //Posição do respawn do pc
@@ -117,6 +101,7 @@
     var posicao_y = 1 * cellSize;
 
     //MAIN ================================================================================================
+    restart();  //Inicializa variaveis
     requestAnimationFrame(loop);
 
     //FUNÇÕES PRINCIPAIS
@@ -125,16 +110,18 @@
         anterior = t;
 
         if (!jogando) {
+
             desenha_menu_inicial();
         }
         else {
+            pontos = pc.caminhos.length;
             if (vidas == 0) { //Se acabou as vidas
                 gameOver();
             }
             else if (alive) { //Se esta vivo, roda o jogo
                 //Se chegou ao fim do jogo
-                if (pc.pontos == totalPontos) {
-                    venceu();
+                if (pontos == totalPontos) {
+                    window.setTimeout(function () { venceu(); }, 400);
                 }
                 else {
                     update(dt);
@@ -142,32 +129,38 @@
                 }
             }
             else { //Se for acertado chama respawn
-                assetsMng.startSound("hitSound", 0.2, false);
+                assetsMng.startSound("hitSound", 0.1, false);
                 hit = true;
                 explosao.x = pc.x;
                 explosao.y = pc.y;
                 window.setTimeout(function () { hit = false; vidas--; }, 1300);    //Tempo para animação da morte.
                 respawn();
             }
+            desenhaHUD();
         }
+        //fps
+        ctx.fillStyle = "white";
+        ctx.font = "18px verdana";
+        ctx.fillText(Math.floor(1 / dt), cnv.width - 28, 20);
+
         requestAnimationFrame(loop);
     }
 
     function update() {
-        if (!hit) { //Para somente mover quando terminar a animação de morte.
+        if (!hit) { //Somente mover quando terminar a animação de morte.
             pc.mover(teclas);//move Sprite
         }
-        for (const i in mapa.walls) { //Colisão do pc com mapa
-            var parede = mapa.walls[i];
-            pc.colisaoMap(parede);
-            parede = null;
+
+        for (const i in mapa.walls) { //Colisão do pc com as paredes
+            pc.colisaoMap(mapa.walls[i]);
         }
 
-        for (const i in mapa.serrasEstaticas) { //colisão da serra estatica
-            if (mapa.serrasEstaticas[i].colidiuCom(pc)) {
+        for (const i in mapa.spikes) { //colisão da serra estatica
+            if (mapa.spikes[i].colidiuCom(pc)) {
                 alive = false;
             }
         }
+
         for (const i in serras) { //Movimento e colisão da serra
             serras[i].mover();
             if (serras[i].colidiuCom(pc)) {
@@ -186,11 +179,15 @@
                 coracoes.splice(i, 1);
                 if (vidas < 3)
                     vidas++;
+                break;
             }
         }
         for (const i in checkPoints) {  //Colisão com checkpoint
             if (checkPoints[i].colidiuCom(pc)) {
+                if (!checkPoints[i].ativo)
+                    assetsMng.startSound("checkSound", 0.3, false);
                 checkPoints[i].ativo = true;
+
                 posicao_y = checkPoints[i].y;
                 posicao_x = checkPoints[i].x;
             }
@@ -203,9 +200,6 @@
 
         for (const i in checkPoints) {  //Desenha checkPoints
             checkPoints[i].renderCheck(dt);
-        }
-        for (const i in mapa.serrasEstaticas) { //Desenha serras estaticas
-            mapa.serrasEstaticas[i].render(dt);
         }
         for (const i in coracoes) { //Desenha corações
             coracoes[i].renderHeart(dt);
@@ -222,7 +216,6 @@
         else { //Se não desenha o sprite normalmente
             pc.render(dt);
         }
-        desenhaHUD();
     }
 
     //OUTRAS FUNÇÕES
@@ -233,30 +226,28 @@
     }
 
     function restart() { //Volta todas variaveis (necessarias) para o estado inicial do jogo.
-        //assetsMng.inicia("OST");
-        alive = true;
+        playOST(mainOST);
         vidas = 3;
-        //Se andou no mapa
-        if (pc.pontos > 1)
-            mapa.clearMap();  //Apaga partes pintadas de verde
-
-        pc.x = cellSize + 6;
-        pc.y = cellSize;
-        //posição do respawn
-        posicao_x = 1 * cellSize;
-        posicao_y = 1 * cellSize;
-        pc.pontos = 0;
+        pontos = 0;
+        for (const i in pc.caminhos) {//Apaga partes pintadas do mapa
+            mapa.clearMap(pc.caminhos[i]);
+        }
+        pc.caminhos.length = 0;
         for (const i in checkPoints) {
             checkPoints[i].ativo = false;
         }
+        coracoes.length = 0;
         coracoes.push(new NPC_estatico({ x: cellSize * 11, y: 20 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx }));
         coracoes.push(new NPC_estatico({ x: cellSize * 13, y: 6 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx }));
         coracoes.push(new NPC_estatico({ x: cellSize * 2, y: 11 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx }));
+        //Volta a posição do respawn pro inicio do mapa, e chama o respawn
+        posicao_x = 1 * cellSize;
+        posicao_y = 1 * cellSize;
+        respawn();
     }
 
-
     function gameOver() {
-        //assetsMng.para("OST");
+        pauseOST(mainOST);
         ctx.globalAlpha = 0.2;
         ctx.fillStyle = "black";
         ctx.fillRect(32, 32, cnv.width - 64, cnv.height - 64);
@@ -268,13 +259,11 @@
 
         ctx.font = "30px Verdana";
         ctx.fillStyle = "white";
-        if (pc.pontos > recorde) {
-            recorde = pc.pontos;
-            ctx.fillText("NOVO RECORDE: " + recorde + " pontos", (cnv.width / 2) - 210, (cnv.height / 2) + 250);
+        if (pontos > recorde) {
+            recorde = pontos;
         }
-        else {
-            ctx.fillText("RECORDE: " + recorde + " pontos", (cnv.width / 2) - 140, (cnv.height / 2) + 250);
-        }
+        ctx.fillText("RECORDE: " + recorde + " pontos", (cnv.width / 2) - 140, (cnv.height / 2) + 250);
+        
 
         ctx.lineWidth = 2;
         ctx.strokeStyle = "white"; ctx.fillStyle = 'red';
@@ -283,28 +272,15 @@
         ctx.fillStyle = "white";
         ctx.font = "40px arial  ";
         ctx.fillText("PLAY", (cnv.width / 2) - 50, (cnv.height / 2) + 115);
-        desenhaHUD();
         document.querySelector('canvas').addEventListener("click", function _listener() {
             document.querySelector('canvas').removeEventListener("click", _listener, true);
             restart();
         }, true);
     }
-    //DESENHA MENU INICIAL
 
+    //DESENHA MENU INICIAL
     function desenha_menu_inicial() {
-        if(tocandoOST){
-            playPromise = ost.play();
-        
-        if (playPromise !== undefined) {
-            playPromise.then(_ => {
-                ost.play();
-                tocandoOST=true;
-            });
-        }
-        }
-        restart();
-        ctx.drawImage(assetsMng.img("back"), 0, 0, cnv.width, cnv.height);
-        ctx.drawImage(assetsMng.img('titulo'), (cnv.width / 2) - 205, 50, 410, 150);
+        ctx.drawImage(assetsMng.img("background"), 0, 0, cnv.width, cnv.height);
         ctx.font = "30px arial"; ctx.fillStyle = "white";
         ctx.fillText("CLIQUE PARA COMEÇAR", cnv.width / 2 - 170, 680);
 
@@ -324,12 +300,10 @@
     }
     //Se juntou todos os pontos
     function venceu() {
-        //assetsMng.para("OST");
-        ctx.globalAlpha = 0.6;
+        pauseOST(mainOST);
+        ctx.globalAlpha = 0.2;
         ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, cnv.width, cnv.height);
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, cnv.height / 2 - 140, cnv.width, 150);
+        ctx.fillRect(32, 32, cnv.width - 64, cnv.height - 64);
         ctx.globalAlpha = 1.0;
         ctx.fillStyle = "white";
         ctx.font = "100px bold sans-serif";
@@ -337,13 +311,10 @@
 
         ctx.font = "30px Verdana";
         ctx.fillStyle = "white";
-        if (pc.pontos > recorde) {
-            recorde = pc.pontos;
-            ctx.fillText("NOVO RECORDE: " + recorde + " pontos", (cnv.width / 2) - 210, (cnv.height / 2) + 250);
+        if (pontos > recorde) {
+            recorde = pontos;
         }
-        else {
-            ctx.fillText("RECORDE: " + recorde + " pontos", (cnv.width / 2) - 160, (cnv.height / 2) + 250);
-        }
+        ctx.fillText("RECORDE: " + recorde + " pontos", (cnv.width / 2) - 160, (cnv.height / 2) + 250);
 
         ctx.font = "50px bold roboto"; ctx.lineWidth = 2;
         ctx.strokeStyle = "white"; ctx.fillStyle = 'blue';
@@ -351,7 +322,6 @@
         ctx.strokeRect((cnv.width / 2) - 110, (cnv.height / 2) + 50, 200, 50);
         ctx.fillStyle = "white";
         ctx.fillText("PLAY", (cnv.width / 2) - 70, (cnv.height / 2) + 90);
-        desenhaHUD();
 
         document.querySelector('canvas').addEventListener("click", function _listener() {
             document.querySelector('canvas').removeEventListener("click", _listener, true);
@@ -373,10 +343,46 @@
         ctx.globalAlpha = 1;
         ctx.fillStyle = "white";
         ctx.font = "15px bold monospaced";
-        ctx.fillText("PONTOS: " + pc.pontos, 75, 17);
+        ctx.fillText("PONTOS: " + pontos, 75, 17);
 
-        var heart = "vida" + vidas; //Soma string "vida" com o valor da variavel para ter o nome de cada imagem
-        ctx.drawImage(assetsMng.img(heart), 5, 4, 54, 17);
+        var heart_Y;
+        switch (vidas) {
+            case 0:
+                heart_Y = 0;
+                break;
+            case 1:
+                heart_Y = 17;
+                break;
+            case 2:
+                heart_Y = 34;
+                break;
+            default:
+                heart_Y = 51;
+                break;
+        }
+        ctx.drawImage(assetsMng.img("pack"),
+            110, heart_Y,//posição na img
+            54, 17,     //corte
+            5, 4,      //posição no cnv
+            54, 17,
+        );
+    }
+
+    function playOST(ost) {
+        playPromise = ost.play();
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                ost.play();
+                ost.volume = 0.1;
+                ost.loop = true;
+
+            });
+        }
+
+    }
+    function pauseOST(ost) {
+        ost.pause();
+        ost.load();
     }
 
     //CONTROLES

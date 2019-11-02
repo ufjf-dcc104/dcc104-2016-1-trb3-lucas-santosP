@@ -1,7 +1,7 @@
 body{
     padding: 0;
     margin: 0;
-    
+    height: 100vh;
 }
 .cv{
     position: relative;
@@ -13,10 +13,9 @@ body{
 }
 .container{
     text-align: center;
-    width: 100vw;
-    height: 100vh;
-    
-    background: url("../assets/imgs/background.png");
     background-attachment: fixed;
     background-size: cover;
+    height: 100%;
+    background-image: linear-gradient(#75a7f3,#111f6f );
+   
 }

@@ -23,11 +23,11 @@ NPC.prototype.render = function (dt) {
     this.frame += this.rotacao * dt;
     var F = Math.floor(this.frame);
     this.ctx.drawImage(
-        this.assets.img("serra"),
-        (F % 3) * 124,
-        0,
-        124,
-        122,
+        this.assets.img("pack"),
+        110+(F%3) * 36,
+        82,
+        38,
+        36,
         this.x,
         this.y,
         this.w,

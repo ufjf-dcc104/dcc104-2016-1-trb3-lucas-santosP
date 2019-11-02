@@ -19,58 +19,60 @@ NPC_estatico.prototype.renderCheck = function (dt) {
     this.mc = Math.floor((this.x + (this.w / 2)) / this.mapa.SIZE);
     this.ml = Math.floor((this.y + (this.h / 2)) / this.mapa.SIZE);
     this.frame += 12 * dt;
-
+    
     if(this.ativo){
         this.ctx.drawImage(
-            this.assets.img("cp_ativo"),
+            this.assets.img("pack"),
             0,
             0,
-            34,
+            55,
             51,
-            this.x+3,
+            this.x-9,//para centralizar
             this.y,
-            this.w,
+            this.w+20,
             this.h,
         );
     }
     else{
         this.ctx.drawImage(
-            this.assets.img("cp_desligado"),
+            this.assets.img("pack"),
+            55,
             0,
-            0,
-            34,
+            55,
             51,
-            this.x+3,//para centralizar
+            this.x-9,//para centralizar
             this.y,
-            this.w,
+            this.w+20,
             this.h,
         );
+        
     }
 }
 
 NPC_estatico.prototype.renderDeath = function (dt) {
+
     this.frame += 10 * dt;
     var F = Math.floor(this.frame);
-    this.ctx.save();
     this.ctx.drawImage(
-        this.assets.img("death"),
-        (F%5)*20,
-        0,
+        this.assets.img("pack"),
+        110+(F%5)*20,
+        118,
         20,
         23,
         this.x,
         this.y,
-        20,
         23,
+        26,
     );
 }
 
 NPC_estatico.prototype.renderHeart = function (dt) {
+
     this.frame += 50 * dt;
     var F = Math.floor(this.frame);
     this.ctx.drawImage(
-        this.assets.img("heart"),
-        0,
+        this.assets.img("pack"),
+        164,
         0,
         32,
         32,
@@ -85,7 +87,7 @@ NPC_estatico.prototype.colidiuCom = function (alvo) {
     // + e - numeros para dar uma margem a mais para colisão
     if (alvo.x + alvo.w - 5 < this.x) return false;
     if (alvo.x + 5 > this.x + this.w) return false;
-    if (alvo.y + alvo.h-2 < this.y) return false;
+    if (alvo.y + alvo.h - 2 < this.y) return false;
     if (alvo.y + 8 > this.y + this.h) return false;
 
     return true;

@@ -4,6 +4,7 @@ function Sprite(params = {}) {
         h: 25,      w: 20,
         vx: 2.3,    vy: 2.3,
         mc: 0,      my: 0,
+        caminhos:[],
         assets: undefined,
         mapa: undefined,
         cellsSize:32,
@@ -20,37 +21,39 @@ Sprite.prototype.constructor = Sprite;
 Sprite.prototype.render = function (dt) {
     //Desenhando no chão
     if (this.mapa.cells[this.mc][this.ml].tipo == 0) {
-        this.pontos++;
         this.mapa.cells[this.mc][this.ml].tipo = 2;
+        var x={c:this.mc, l:this.ml};
+        this.caminhos.push(x);
+        x=null;
     }
     
     this.frame += 10 * dt;
     var F = Math.floor(this.frame);
-    var imgX = (F % 8) * 20; var imgY;
+    var imgX = (F % 7) * 20; var imgY;
 
     switch (this.direcao) {
         case 'direita':
-            imgY = 26;
+            imgY = 190;
             break;
         case 'esquerda':
-            imgY = 78;
+            imgY = 242;
             break;
 
         case 'cima':
-            imgY = 52;
+            imgY = 218;
             break;
 
         case 'baixo':
-            imgY = 0;
+            imgY = 164;
             break;
 
         default:
-            imgX = -2;
-            imgY = 0;
+            imgX = 60;
+            imgY = 164;
             break;
     }
     this.ctx.drawImage(
-        this.assets.img("player"),
+        this.assets.img("pack"),
         imgX,
         imgY,
         20,

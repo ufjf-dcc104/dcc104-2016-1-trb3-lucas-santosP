@@ -94,7 +94,6 @@
     var recorde = 0;
     var jogando = false;
     var playPromise;
-    var tocandoOST; //Variavel para garantir que a ost é tocando um por vez
     const totalPontos = mapa.totalPts;
     //Posição do respawn do pc
     var posicao_x = 1 * cellSize;
@@ -225,7 +224,6 @@
     }
 
     function restart() { //Volta todas variaveis (necessarias) para o estado inicial do jogo.
-        window.setTimeout(function () { playOST(mainOST); }, 100); 
         vidas = 3;
         pontos = 0;
         for (const i in pc.caminhos) {//Apaga partes pintadas do mapa
@@ -273,6 +271,7 @@
         ctx.fillText("PLAY", (cnv.width / 2) - 50, (cnv.height / 2) + 115);
         document.querySelector('canvas').addEventListener("click", function _listener() {
             document.querySelector('canvas').removeEventListener("click", _listener, true);
+            playOST(mainOST);
             restart();
         }, true);
     }
@@ -295,6 +294,7 @@
         document.querySelector('canvas').addEventListener("click", function _listener() {
             document.querySelector('canvas').removeEventListener("click", _listener, true);
             jogando = true;
+            playOST(mainOST);
         }, true);
     }
     //Se juntou todos os pontos
@@ -324,6 +324,7 @@
 
         document.querySelector('canvas').addEventListener("click", function _listener() {
             document.querySelector('canvas').removeEventListener("click", _listener, true);
+            playOST(mainOST);
             restart();
         }, true);
 
@@ -369,20 +370,17 @@
 
     function playOST(ost) {
         playPromise = ost.play();
-        if (playPromise !== undefined && !tocandoOST) {
+        if (playPromise !== undefined) {
             playPromise.then(_ => {
                 ost.play();
                 ost.volume = 0.1;
                 ost.loop = true;
-                tocandoOST=true;
             });
         }
-
     }
     function pauseOST(ost) {
         ost.pause();
         ost.load();
-        tocandoOST=false;
     }
 
     //CONTROLES

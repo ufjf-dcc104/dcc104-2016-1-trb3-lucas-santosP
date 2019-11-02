@@ -40,7 +40,6 @@ function Map(modelo) {
                 }
             }
         }
-        console.log(this.totalPts);
     }
 }
 

@@ -35,11 +35,11 @@
             [1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1],
             [1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
-            [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 1, 0, 1, 0, 1, 0, 1, 3, 3, 3, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-            [1, 0, 0, 1, 0, 0, 3, 0, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1],
-            [1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 1],
+            [1, 0, 0, 1, 0, 0, 3, 0, 1, 0, 3, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1],
+            [1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 3, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 1],
             [1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
             [1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 1],
             [1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 3, 3, 3, 3, 0, 1, 0, 1, 1, 0, 1],
@@ -55,7 +55,7 @@
     var pc = new Sprite({ x: 32 + 8, y: 32, assets: assetsMng, mapa: mapa, ctx: ctx });
 
     var serras = [];
-    serras.push(new NPC({ x: cellSize * 1, y: 19 * cellSize, direcao: 'y', vy: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 1, y: 19 * cellSize, direcao: 'y', vy: 2.5, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 18, y: 5 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 18, y: 3 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 18, y: 7 * cellSize, direcao: 'x', vx: 3.5, assets: assetsMng, mapa: mapa, ctx: ctx }));
@@ -68,13 +68,13 @@
     serras.push(new NPC({ x: cellSize * 11, y: 3 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 23, y: 3 * cellSize, direcao: 'y', vy: 1.2, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 23, y: 6 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    serras.push(new NPC({ x: cellSize * 28, y: 6 * cellSize, direcao: 'y', vy: 2.3, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 28, y: 6 * cellSize, direcao: 'y', vy: 2.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 25, y: 10 * cellSize, direcao: 'y', vy: 3.5, assets: assetsMng, mapa: mapa, ctx: ctx }));
 
     var serrasCirulares = [];
     serrasCirulares.push(new NPC({ x: cellSize * 25, y: 1 * cellSize, vx: 3.8, vy: 3.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serrasCirulares.push(new NPC({ x: cellSize * 9, y: 15 * cellSize, vx: 3.3, vy: 3.3, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    serrasCirulares.push(new NPC({ x: cellSize * 9, y: 9 * cellSize, vx: 3, vy: 3, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serrasCirulares.push(new NPC({ x: cellSize * 9, y: 9 * cellSize, vx: 0.6, vy: 3.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serrasCirulares.push(new NPC({ x: cellSize * 5, y: 11 * cellSize, vx: 3.4, vy: 3.4, assets: assetsMng, mapa: mapa, ctx: ctx }));
 
     var checkPoints = [];
@@ -131,7 +131,10 @@
                 hit = true;
                 explosao.x = pc.x;
                 explosao.y = pc.y;
-                window.setTimeout(function () { hit = false; vidas--; }, 1300);    //Tempo para animação da morte.
+                window.setTimeout(function () {
+                    hit = false;
+                    vidas--;
+                }, 1300);//Tempo para animação da morte.
                 respawn();
             }
             desenhaHUD();
@@ -195,6 +198,18 @@
     function render() {
         ctx.clearRect(0, 0, cnv.width, cnv.height);
         mapa.render();
+        //Checkpoint inicial
+        ctx.drawImage(
+            assetsMng.img("pack"),
+            0,
+            0,
+            55,
+            51,
+            cellSize - 9,//-9 para centralizar
+            cellSize,
+            48,
+            32,
+        );
 
         for (const i in checkPoints) {  //Desenha checkPoints
             checkPoints[i].renderCheck(dt);

@@ -7,7 +7,6 @@
         esquerda: false, cima: false,
         direita: false, baixo: false,
     };
-
     var assetsMng = new AssetsManager();
     assetsMng.loadImage("chao_inicial", "assets/imgs/chao1.png");
     assetsMng.loadImage("chao_final", "assets/imgs/chao2.png");
@@ -17,7 +16,7 @@
     assetsMng.loadAudio("pickSound", "assets/sounds/pick.mp3");
     assetsMng.loadAudio("hitSound", "assets/sounds/death-sound-effect.mp3");
     assetsMng.loadAudio("checkSound", "assets/sounds/checkpointSound.mp3");
-    var mainOST = new Audio('assets/sounds/OST.mp3');
+    var mainOST = new Audio('assets/sounds/OST-small.mp3');
 
     var cellSize = 32;
     var mapa = new Map({
@@ -102,6 +101,11 @@
     //MAIN ================================================================================================
     restart();  //Inicializa variaveis
     requestAnimationFrame(loop);
+    document.querySelector('canvas').addEventListener("click", function _listener() {
+        document.querySelector('canvas').removeEventListener("click", _listener, true);
+        jogando = true;
+        playOST(mainOST);
+    }, true);
 
     //FUNÇÕES PRINCIPAIS
     function loop(t) {
@@ -193,6 +197,7 @@
                 posicao_x = checkPoints[i].x;
             }
         }
+
     }
 
     function render() {
@@ -231,7 +236,23 @@
         }
     }
 
-    //OUTRAS FUNÇÕES
+    //OUTRAS FUNÇÕES ================================================
+    function desenha_menu_inicial() {
+        ctx.drawImage(assetsMng.img("background"), 0, 0, cnv.width, cnv.height);
+        ctx.font = "30px arial"; ctx.fillStyle = "white";
+        ctx.fillText("CLIQUE PARA COMEÇAR", cnv.width / 2 - 170, 680);
+
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "white"; ctx.fillStyle = 'blue';
+        ctx.fillRect((cnv.width / 2) - 90, (cnv.height / 2) + 230, 180, 40);
+        ctx.strokeRect((cnv.width / 2) - 90, (cnv.height / 2) + 230, 180, 40);
+        ctx.fillStyle = "white";
+        ctx.font = "40px arial  ";
+        ctx.fillText("PLAY", (cnv.width / 2) - 50, (cnv.height / 2) + 265);
+        checkMenu1.renderCheck(dt);
+        checkMenu2.renderCheck(dt);
+    }
+
     function respawn() {
         alive = true;
         pc.x = posicao_x + 6;
@@ -272,12 +293,8 @@
 
         ctx.font = "30px Verdana";
         ctx.fillStyle = "white";
-        if (pontos > recorde) {
-            recorde = pontos;
-        }
+        if (pontos > recorde) { recorde = pontos; }
         ctx.fillText("RECORDE: " + recorde + " pontos", (cnv.width / 2) - 140, (cnv.height / 2) + 250);
-
-
         ctx.lineWidth = 2;
         ctx.strokeStyle = "white"; ctx.fillStyle = 'red';
         ctx.fillRect((cnv.width / 2) - 90, (cnv.height / 2) + 80, 180, 40);
@@ -289,28 +306,6 @@
             document.querySelector('canvas').removeEventListener("click", _listener, true);
             playOST(mainOST);
             restart();
-        }, true);
-    }
-
-    //DESENHA MENU INICIAL
-    function desenha_menu_inicial() {
-        ctx.drawImage(assetsMng.img("background"), 0, 0, cnv.width, cnv.height);
-        ctx.font = "30px arial"; ctx.fillStyle = "white";
-        ctx.fillText("CLIQUE PARA COMEÇAR", cnv.width / 2 - 170, 680);
-
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = "white"; ctx.fillStyle = 'blue';
-        ctx.fillRect((cnv.width / 2) - 90, (cnv.height / 2) + 230, 180, 40);
-        ctx.strokeRect((cnv.width / 2) - 90, (cnv.height / 2) + 230, 180, 40);
-        ctx.fillStyle = "white";
-        ctx.font = "40px arial  ";
-        ctx.fillText("PLAY", (cnv.width / 2) - 50, (cnv.height / 2) + 265);
-        checkMenu1.renderCheck(dt);
-        checkMenu2.renderCheck(dt);
-        document.querySelector('canvas').addEventListener("click", function _listener() {
-            document.querySelector('canvas').removeEventListener("click", _listener, true);
-            jogando = true;
-            playOST(mainOST);
         }, true);
     }
     //Se juntou todos os pontos
@@ -326,9 +321,7 @@
 
         ctx.font = "30px Verdana";
         ctx.fillStyle = "white";
-        if (pontos > recorde) {
-            recorde = pontos;
-        }
+        if (pontos > recorde) { recorde = pontos; }
         ctx.fillText("RECORDE: " + recorde + " pontos", (cnv.width / 2) - 160, (cnv.height / 2) + 250);
 
         ctx.font = "50px bold roboto"; ctx.lineWidth = 2;
@@ -398,11 +391,11 @@
             });
         }
     }
+
     function pauseOST(ost) {
         ost.pause();
         ost.load();
     }
-
     //CONTROLES
     window.addEventListener("keydown", function (e) {
         switch (e.keyCode) {

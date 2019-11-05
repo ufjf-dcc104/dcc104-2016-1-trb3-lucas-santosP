@@ -84,12 +84,9 @@
 
     var explosao = new NPC_estatico({ x: cellSize * 21, y: 5 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx });
 
-    var checkMenu1 = new NPC_estatico({ x: 50, y: 465, w: 90, h: 90, ativo: true, assets: assetsMng, mapa: mapa, ctx: ctx });
-    var checkMenu2 = new NPC_estatico({ x: 840, y: 465, w: 90, h: 90, ativo: true, assets: assetsMng, mapa: mapa, ctx: ctx });
-
-    var dt = 0; var anterior = 0;
-    var alive; var hit = false;
-    var vidas; var pontos;
+    var dt = 0;     var anterior = 0;
+    var alive;      var hit = false;
+    var vidas;      var pontos;
     var recorde = 0;
     var jogando = false;
     var playPromise;
@@ -107,7 +104,7 @@
         playOST(mainOST);
     }, true);
 
-    //FUNÇÕES PRINCIPAIS
+    //FUNÇÕES PRINCIPAIS ==================================================================================
     function loop(t) {
         dt = (t - anterior) / 1000;
         anterior = t;
@@ -131,7 +128,7 @@
                 }
             }
             else { //Se for acertado chama respawn
-                assetsMng.startSound("hitSound", 0.1, false);
+                assetsMng.playSoundEffect("hitSound", 0.1, false);
                 hit = true;
                 explosao.x = pc.x;
                 explosao.y = pc.y;
@@ -143,11 +140,10 @@
             }
             desenhaHUD();
         }
-        //fps
+        //desenha FPS
         ctx.fillStyle = "white";
         ctx.font = "18px verdana";
         ctx.fillText(Math.floor(1 / dt), cnv.width - 28, 20);
-
         requestAnimationFrame(loop);
     }
 
@@ -156,16 +152,14 @@
             pc.mover(teclas);//move Sprite
         }
 
-        for (const i in mapa.walls) { //Colisão do pc com as paredes
-            pc.colisaoMap(mapa.walls[i]);
-        }
+        //Chama função para decidir qual quarto do mapa vai verificar a colisão com base na posição atual do pc
+        colisãoComParedes();
 
-        for (const i in mapa.spikes) { //colisão da serra estatica
-            if (mapa.spikes[i].colidiuCom(pc)) {
+        for (const i in mapa.spikes) { //colisão da spikes estatica
+            if (mapa.spikes[i].SpikeColidiuCom(pc)) {
                 alive = false;
             }
         }
-
         for (const i in serras) { //Movimento e colisão da serra
             serras[i].mover();
             if (serras[i].colidiuCom(pc)) {
@@ -180,7 +174,7 @@
         }
         for (const i in coracoes) { //Colisão com corações
             if (coracoes[i].colidiuCom(pc)) {
-                assetsMng.startSound("pickSound", 1, false);
+                assetsMng.playSoundEffect("pickSound", 1, false);
                 coracoes.splice(i, 1);
                 if (vidas < 3)
                     vidas++;
@@ -189,15 +183,12 @@
         }
         for (const i in checkPoints) {  //Colisão com checkpoint
             if (checkPoints[i].colidiuCom(pc)) {
-                if (!checkPoints[i].ativo)
-                    assetsMng.startSound("checkSound", 0.3, false);
+                if (!checkPoints[i].ativo) { assetsMng.playSoundEffect("checkSound", 0.3, false); }
                 checkPoints[i].ativo = true;
-
                 posicao_y = checkPoints[i].y;
                 posicao_x = checkPoints[i].x;
             }
         }
-
     }
 
     function render() {
@@ -235,6 +226,90 @@
             pc.render(dt);
         }
     }
+    
+    function colisãoComParedes() {
+        if (pc.ml < 11) {//Se pc esta na parte decima
+            if (pc.mc < 15) {
+                //console.log("Em: walls00");
+                for (const i in mapa.walls00) {
+                    pc.colisaoMap(mapa.walls00[i]);
+                }
+            }
+            else if (pc.mc > 15) {
+                //console.log("Em: walls10");
+                for (const i in mapa.walls10) {
+                    pc.colisaoMap(mapa.walls10[i]);
+                }
+            }
+            else {
+                //console.log("Em: ambos decima");
+                for (const i in mapa.walls10) {
+                    pc.colisaoMap(mapa.walls10[i]);
+                }
+                for (const i in mapa.walls00) {
+                    pc.colisaoMap(mapa.walls00[i]);
+                }
+            }
+        }
+        else if (pc.ml > 11) {//Se pc esta na parte debaixo
+            if (pc.mc < 15) {
+                //console.log("Em: walls01");
+                for (const i in mapa.walls01) {
+                    pc.colisaoMap(mapa.walls01[i]);
+                }
+            }
+            else if (pc.mc > 15) {
+                //console.log("Em: walls11");
+                for (const i in mapa.walls11) {
+                    pc.colisaoMap(mapa.walls11[i]);
+                }
+            }
+            else {
+                //console.log("Em: ambos debaixo");
+                for (const i in mapa.walls01) {
+                    pc.colisaoMap(mapa.walls01[i]);
+                }
+                for (const i in mapa.walls11) {
+                    pc.colisaoMap(mapa.walls11[i]);
+                }
+            }
+        }
+        else {//Se pc esta no meio
+            if (pc.mc < 15) {
+                //console.log("Em: ambos esquerda");
+                for (const i in mapa.walls00) {
+                    pc.colisaoMap(mapa.walls00[i]);
+                }
+                for (const i in mapa.walls01) {
+                    pc.colisaoMap(mapa.walls01[i]);
+                }
+            }
+            else if (pc.mc > 15) {
+                //console.log("Em: ambos direita");
+                for (const i in mapa.walls11) {
+                    pc.colisaoMap(mapa.walls11[i]);
+                }
+                for (const i in mapa.walls10) {
+                    pc.colisaoMap(mapa.walls10[i]);
+                }
+            }
+            else {
+                //console.log("Em: TODOS!");
+                for (const i in mapa.walls11) {
+                    pc.colisaoMap(mapa.walls11[i]);
+                }
+                for (const i in mapa.walls10) {
+                    pc.colisaoMap(mapa.walls10[i]);
+                }
+                for (const i in mapa.walls00) {
+                    pc.colisaoMap(mapa.walls00[i]);
+                }
+                for (const i in mapa.walls01) {
+                    pc.colisaoMap(mapa.walls01[i]);
+                }
+            }
+        }
+    }
 
     //OUTRAS FUNÇÕES ================================================
     function desenha_menu_inicial() {
@@ -249,8 +324,6 @@
         ctx.fillStyle = "white";
         ctx.font = "40px arial  ";
         ctx.fillText("PLAY", (cnv.width / 2) - 50, (cnv.height / 2) + 265);
-        checkMenu1.renderCheck(dt);
-        checkMenu2.renderCheck(dt);
     }
 
     function respawn() {
@@ -370,17 +443,12 @@
                 break;
         }
         ctx.drawImage(assetsMng.img("pack"),
-            110,
-            heart_Y,
-            54,
-            17,
-            5,
-            4,
-            54,
-            17,
+            110,    heart_Y,
+            54,     17,
+            5,      4,
+            54,     17,
         );
     }
-
     function playOST(ost) {
         playPromise = ost.play();
         if (playPromise !== undefined) {
@@ -396,6 +464,7 @@
         ost.pause();
         ost.load();
     }
+
     //CONTROLES
     window.addEventListener("keydown", function (e) {
         switch (e.keyCode) {

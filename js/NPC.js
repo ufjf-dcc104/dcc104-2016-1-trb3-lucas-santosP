@@ -76,9 +76,7 @@ NPC.prototype.mover = function () {
             this.cond = true;
         }
     }
-
 }
-
 NPC.prototype.colidiuCom = function (alvo) {
     // + e - numeros para dar uma margem a mais para colisão
     if (alvo.x + alvo.w - 5 < this.x) return false;
@@ -87,6 +85,15 @@ NPC.prototype.colidiuCom = function (alvo) {
     if (alvo.y + 8 > this.y + this.h) return false;
 
     return true;
+}
+NPC.prototype.SpikeColidiuCom = function (alvo) {
+    if (alvo.x + alvo.w - 2 < this.x) return false;
+    if (alvo.x + 2 > this.x + this.w) return false;
+    if (alvo.y + alvo.h - 2 < this.y) return false;
+    if (alvo.y + 2 > this.y + this.h) return false;
+
+    return true;
+
 }
 
 NPC.prototype.moverCircular = function () {

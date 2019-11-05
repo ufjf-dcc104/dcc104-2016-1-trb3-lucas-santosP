@@ -19,33 +19,33 @@ NPC_estatico.prototype.renderCheck = function (dt) {
     this.mc = Math.floor((this.x + (this.w / 2)) / this.mapa.SIZE);
     this.ml = Math.floor((this.y + (this.h / 2)) / this.mapa.SIZE);
     this.frame += 12 * dt;
-    
-    if(this.ativo){
+
+    if (this.ativo) {
         this.ctx.drawImage(
             this.assets.img("pack"),
             0,
             0,
             55,
             51,
-            this.x-9,//para centralizar
+            this.x - 9,//para centralizar
             this.y,
-            this.w+20,
+            this.w + 20,
             this.h,
         );
     }
-    else{
+    else {
         this.ctx.drawImage(
             this.assets.img("pack"),
             55,
             0,
             55,
             51,
-            this.x-9,//para centralizar
+            this.x - 9,//para centralizar
             this.y,
-            this.w+20,
+            this.w + 20,
             this.h,
         );
-        
+
     }
 }
 
@@ -55,7 +55,7 @@ NPC_estatico.prototype.renderDeath = function (dt) {
     var F = Math.floor(this.frame);
     this.ctx.drawImage(
         this.assets.img("pack"),
-        110+(F%5)*20,
+        110 + (F % 5) * 20,
         118,
         20,
         23,

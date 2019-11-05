@@ -1,13 +1,13 @@
 function Sprite(params = {}) {
     var exemplo = {
-        x: 64,      y: 64,
-        h: 25,      w: 20,
-        vx: 2.3,    vy: 2.3,
-        mc: 0,      my: 0,
-        caminhos:[],
+        x: 64, y: 64,
+        h: 25, w: 20,
+        vx: 2.3, vy: 2.3,
+        mc: 0, my: 0,
+        caminhos: [],
         assets: undefined,
         mapa: undefined,
-        cellsSize:32,
+        cellsSize: 32,
         ctx: null,
         frame: 0,
         direcao: '',
@@ -21,14 +21,15 @@ Sprite.prototype.render = function (dt) {
     //Desenhando no chão
     if (this.mapa.cells[this.mc][this.ml].tipo == 0) {
         this.mapa.cells[this.mc][this.ml].tipo = 2;
-        var x={c:this.mc, l:this.ml};
+        var x = { c: this.mc, l: this.ml };
         this.caminhos.push(x);
-        x=null;
+        x = null;
     }
-    
+
     this.frame += 10 * dt;
     var F = Math.floor(this.frame);
-    var imgX = (F % 7) * 20; var imgY;
+    var imgX = (F % 7) * 20;
+    var imgY;
 
     switch (this.direcao) {
         case 'direita':

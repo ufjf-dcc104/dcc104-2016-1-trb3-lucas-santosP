@@ -17,6 +17,7 @@
     assetsMng.loadAudio("hitSound", "assets/sounds/death-sound-effect.mp3");
     assetsMng.loadAudio("checkSound", "assets/sounds/checkpointSound.mp3");
     var mainOST = new Audio('assets/sounds/OST-small.mp3');
+    var playPromise;
 
     var cellSize = 32;
     var mapa = new Map({
@@ -54,26 +55,27 @@
     var pc = new Sprite({ x: 32 + 8, y: 32, assets: assetsMng, mapa: mapa, ctx: ctx });
 
     var serras = [];
-    serras.push(new NPC({ x: cellSize * 1, y: 19 * cellSize, direcao: 'y', vy: 2.5, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 18, y: 5 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 18, y: 3 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 18, y: 7 * cellSize, direcao: 'x', vx: 3.5, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 13, y: 1 * cellSize, direcao: 'y', vy: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 23, y: 3 * cellSize, direcao: 'y', vy: 1.2, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 23, y: 6 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 28, y: 6 * cellSize, direcao: 'y', vy: 2.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serras.push(new NPC({ x: cellSize * 25, y: 10 * cellSize, direcao: 'y', vy: 3.5, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    
+    serras.push(new NPC({ x: cellSize * 1, y: 19 * cellSize, direcao: 'y', vy: 2.5, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 2, y: 6 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 1, y: 4 * cellSize, direcao: 'x', vx: 1.2, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 8, y: 5 * cellSize, direcao: 'y', vy: 1, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 1, y: 9 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 11, y: 5 * cellSize, direcao: 'y', vy: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 11, y: 3 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    serras.push(new NPC({ x: cellSize * 23, y: 3 * cellSize, direcao: 'y', vy: 1.2, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    serras.push(new NPC({ x: cellSize * 23, y: 6 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    serras.push(new NPC({ x: cellSize * 28, y: 6 * cellSize, direcao: 'y', vy: 2.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    serras.push(new NPC({ x: cellSize * 25, y: 10 * cellSize, direcao: 'y', vy: 3.5, assets: assetsMng, mapa: mapa, ctx: ctx }));
 
     var serrasCirulares = [];
     serrasCirulares.push(new NPC({ x: cellSize * 25, y: 1 * cellSize, vx: 3.8, vy: 3.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serrasCirulares.push(new NPC({ x: cellSize * 9, y: 15 * cellSize, vx: 3.3, vy: 3.3, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    serrasCirulares.push(new NPC({ x: cellSize * 9, y: 9 * cellSize, vx: 0.6, vy: 3.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serrasCirulares.push(new NPC({ x: cellSize * 9, y: 7 * cellSize, vx: 0.6, vy: 3.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serrasCirulares.push(new NPC({ x: cellSize * 5, y: 11 * cellSize, vx: 3.4, vy: 3.4, assets: assetsMng, mapa: mapa, ctx: ctx }));
 
     var checkPoints = [];
@@ -89,7 +91,6 @@
     var vidas;      var pontos;
     var recorde = 0;
     var jogando = false;
-    var playPromise;
     const totalPontos = mapa.totalPts;
     //Posição do respawn do pc
     var posicao_x = 1 * cellSize;
@@ -113,11 +114,11 @@
             desenha_menu_inicial();
         }
         else {
-            pontos = pc.caminhos.length;
             if (vidas == 0) { //Se acabou as vidas
                 gameOver();
             }
             else if (alive) { //Se esta vivo, roda o jogo
+                pontos = pc.caminhos.length;
                 //Se chegou ao fim do jogo
                 if (pontos == totalPontos) {
                     window.setTimeout(function () { venceu(); }, 400);

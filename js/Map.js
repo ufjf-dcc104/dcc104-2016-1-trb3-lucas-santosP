@@ -116,7 +116,8 @@ Map.prototype.criaFase = function () {
                         this.coracoes.push(new NPC_estatico({ 
                             x: c * this.SIZE,
                             y: l * this.SIZE, 
-                            assets: assetsMng, mapa: mapa, ctx: ctx }));
+                            assets: this.assets, mapa: this, ctx: this.ctx
+                        }));
                         break;
 
                     default:

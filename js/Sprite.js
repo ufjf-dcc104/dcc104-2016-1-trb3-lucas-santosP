@@ -19,7 +19,7 @@ Sprite.prototype.constructor = Sprite;
 
 Sprite.prototype.render = function (dt) {
     //Desenhando no chão
-    if (this.mapa.cells[this.mc][this.ml].tipo == 0) {
+    if (this.mapa.cells[this.mc][this.ml].tipo != 1 && this.mapa.cells[this.mc][this.ml].tipo != 2) {
         this.mapa.cells[this.mc][this.ml].tipo = 2;
         var x = { c: this.mc, l: this.ml };
         this.caminhos.push(x);

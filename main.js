@@ -1,3 +1,4 @@
+var mapa2;
 (function () {
     const cnv = document.querySelector("canvas");
     cnv.width = 960;
@@ -27,34 +28,63 @@
         assets: assetsMng,
         ctx: ctx,
         m: [
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1],
-            [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1],
-            [1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-            [1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1],
-            [1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
-            [1, 0, 1, 0, 1, 0, 1, 0, 1, 3, 3, 3, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-            [1, 0, 0, 1, 0, 0, 3, 0, 1, 0, 3, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1],
-            [1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 3, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 1],
-            [1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
-            [1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 1],
-            [1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 3, 3, 3, 3, 0, 1, 0, 1, 1, 0, 1],
-            [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 1],
-            [1, 0, 3, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 3, 0, 3, 3, 3, 3, 1, 0, 1, 1, 0, 1],
-            [1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 1],
-            [1, 3, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 3, 3, 3, 3, 3, 0, 1, 0, 0, 1, 0, 1],
-            [1, 3, 1, 1, 1, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {tipo: -4, vx: 3.8, vy: 3.8}, 0, 0, 0, 1],
+                [1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1],
+                [1, 0, 1, 0, 1, {tipo:4,vx:1.0,vy:1.0,direcao:'x'}, 0, 0, {tipo:4,vx:2,vy:2,direcao:'y'}, 0, 0, 0, 1, {tipo:4,vx:2,vy:2,direcao:'x'}, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1],
+                [1, {tipo:4,vx:2,vy:2,direcao:'x'}, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 5, 0, 1, 0, 0, 0, 0, 1],
+                [1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, {tipo:4,vx:2,vy:2,direcao:'x'}, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1],
+                [1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, {tipo:4,vx:2,vy:2,direcao:'x'}, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 0, 1, 0, 1, 0, 1, 3, 3, 3, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1],
+                [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+                [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+                [1, 0, 0, 1, 0, 0, 3, 0, 1, 0, 3, 0, 3, 0, 0, 0, 0, 0, 1, 0, 5, 0, 1, 0, 0, 0, 1, 1, 0, 1],
+                [1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 3, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 1],
+                [1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
+                [1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 1],
+                [1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 3, 3, 3, 3, 0, 1, 0, 1, 1, 0, 1],
+                [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 1],
+                [1, 0, 3, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 3, 0, 3, 3, 3, 3, 1, 0, 1, 1, 0, 1],
+                [1, {tipo:4,vx:2,vy: 2.5,direcao:'y'}, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 1],
+                [1, 3, 1, 1, 1, 0, 1, 0, 5, 0, 1, 0, 0, 0, 1, 0, 1, 0, 3, 3, 3, 3, 3, 0, 1, 0, 0, 1, 0, 1],
+                [1, 3, 1, 1, 1, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            ], 
+            [
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1],
+                [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1],
+                [1, 0, 0, 0, 1, 0, 1, 1, 0, 0, {tipo:4,vx:2,vy:2,direcao:'x'}, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+                [1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1],
+                [1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+                [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+                [1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5, 0, 1, 0, 0, 0, 1, 1, 0, 1],
+                [1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+                [1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
+                [1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+                [1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
+                [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+                [1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
+                [1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+                [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1],
+                [1, 0, 1, 1, 1, 0, 5, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, {tipo:4,vx:2,vy:2,direcao:'y'}, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            ]
         ]
     });
 
-    var pc = new Sprite({ x: 32 + 8, y: 32, assets: assetsMng, mapa: mapa, ctx: ctx });
+    mapa2 = mapa;
 
+    var pc = new Sprite({ x: 32 + 8, y: 32, assets: assetsMng, mapa: mapa, ctx: ctx });
+    /*
     var serras = [];
+    
     serras.push(new NPC({ x: cellSize * 18, y: 5 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 18, y: 3 * cellSize, direcao: 'x', assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 18, y: 7 * cellSize, direcao: 'x', vx: 3.5, assets: assetsMng, mapa: mapa, ctx: ctx }));
@@ -71,19 +101,19 @@
     serras.push(new NPC({ x: cellSize * 1, y: 9 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 11, y: 5 * cellSize, direcao: 'y', vy: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
     serras.push(new NPC({ x: cellSize * 11, y: 3 * cellSize, direcao: 'x', vx: 2, assets: assetsMng, mapa: mapa, ctx: ctx }));
-
-    var serrasCirulares = [];
-    serrasCirulares.push(new NPC({ x: cellSize * 25, y: 1 * cellSize, vx: 3.8, vy: 3.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    serrasCirulares.push(new NPC({ x: cellSize * 9, y: 15 * cellSize, vx: 3.3, vy: 3.3, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    serrasCirulares.push(new NPC({ x: cellSize * 9, y: 7 * cellSize, vx: 0.6, vy: 3.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    serrasCirulares.push(new NPC({ x: cellSize * 5, y: 11 * cellSize, vx: 3.4, vy: 3.4, assets: assetsMng, mapa: mapa, ctx: ctx }));
-
+    
+    var serrasCirculares = [];
+    serrasCirculares.push(new NPC({ x: cellSize * 25, y: 1 * cellSize, vx: 3.8, vy: 3.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serrasCirculares.push(new NPC({ x: cellSize * 9, y: 15 * cellSize, vx: 3.3, vy: 3.3, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serrasCirculares.push(new NPC({ x: cellSize * 9, y: 7 * cellSize, vx: 0.6, vy: 3.8, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    serrasCirculares.push(new NPC({ x: cellSize * 5, y: 11 * cellSize, vx: 3.4, vy: 3.4, assets: assetsMng, mapa: mapa, ctx: ctx }));
+    
     var checkPoints = [];
     checkPoints.push(new NPC_estatico({ x: cellSize * 20, y: 11 * cellSize, w: 28, h: 32, assets: assetsMng, mapa: mapa, ctx: ctx }));
     checkPoints.push(new NPC_estatico({ x: cellSize * 8, y: 19 * cellSize, w: 28, h: 32, assets: assetsMng, mapa: mapa, ctx: ctx }));
     checkPoints.push(new NPC_estatico({ x: cellSize * 21, y: 5 * cellSize, w: 28, h: 32, assets: assetsMng, mapa: mapa, ctx: ctx }));
-    var coracoes = [];
-
+    var mapa.coracoes = [];
+    */
     var explosao = new NPC_estatico({ x: cellSize * 21, y: 5 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx });
 
     var dt = 0;     var anterior = 0;
@@ -161,33 +191,33 @@
                 alive = false;
             }
         }
-        for (const i in serras) { //Movimento e colisão da serra
-            serras[i].mover();
-            if (serras[i].colidiuCom(pc)) {
+        for (const i in mapa.serrasLineares) { //Movimento e colisão da serra
+            mapa.serrasLineares[i].mover();
+            if (mapa.serrasLineares[i].colidiuCom(pc)) {
                 alive = false;
             }
         }
-        for (const i in serrasCirulares) {  //Movimento e colisão da serra circular
-            serrasCirulares[i].moverCircular();
-            if (serrasCirulares[i].colidiuCom(pc)) {
+        for (const i in mapa.serrasCirculares) {  //Movimento e colisão da serra circular
+            mapa.serrasCirculares[i].moverCircular();
+            if (mapa.serrasCirculares[i].colidiuCom(pc)) {
                 alive = false;
             }
         }
-        for (const i in coracoes) { //Colisão com corações
-            if (coracoes[i].colidiuCom(pc)) {
+        for (const i in mapa.coracoes) { //Colisão com corações
+            if (mapa.coracoes[i].colidiuCom(pc)) {
                 assetsMng.playSoundEffect("pickSound", 1, false);
-                coracoes.splice(i, 1);
+                mapa.coracoes.splice(i, 1);
                 if (vidas < 3)
                     vidas++;
                 break;
             }
         }
-        for (const i in checkPoints) {  //Colisão com checkpoint
-            if (checkPoints[i].colidiuCom(pc)) {
-                if (!checkPoints[i].ativo) { assetsMng.playSoundEffect("checkSound", 0.3, false); }
-                checkPoints[i].ativo = true;
-                posicao_y = checkPoints[i].y;
-                posicao_x = checkPoints[i].x;
+        for (const i in mapa.checkPoints) {  //Colisão com checkpoint
+            if (mapa.checkPoints[i].colidiuCom(pc)) {
+                if (!mapa.checkPoints[i].ativo) { assetsMng.playSoundEffect("checkSound", 0.3, false); }
+                mapa.checkPoints[i].ativo = true;
+                posicao_y = mapa.checkPoints[i].y;
+                posicao_x = mapa.checkPoints[i].x;
             }
         }
     }
@@ -208,17 +238,17 @@
             32,
         );
 
-        for (const i in checkPoints) {  //Desenha checkPoints
-            checkPoints[i].renderCheck(dt);
+        for (const i in mapa.checkPoints) {  //Desenha mapa.checkPoints
+            mapa.checkPoints[i].renderCheck(dt);
         }
-        for (const i in coracoes) { //Desenha corações
-            coracoes[i].renderHeart(dt);
+        for (const i in mapa.coracoes) { //Desenha corações
+            mapa.coracoes[i].renderHeart(dt);
         }
-        for (const i in serras) { //Desenha serras
-            serras[i].render(dt);
+        for (const i in mapa.serrasLineares) { //Desenha serras
+            mapa.serrasLineares[i].render(dt);
         }
-        for (const i in serrasCirulares) { //Desenha serras circulares
-            serrasCirulares[i].render(dt);
+        for (const i in mapa.serrasCirculares) { //Desenha serras circulares
+            mapa.serrasCirculares[i].render(dt);
         }
         if (hit) { //Se for acertado desenha explosao
             explosao.renderDeath(dt);
@@ -341,13 +371,16 @@
         }
         pc.caminhos.length = 0;
 
-        for (const i in checkPoints) {
-            checkPoints[i].ativo = false;
+        for (const i in mapa.checkPoints) {
+            mapa.checkPoints[i].ativo = false;
         }
-        coracoes.length = 0;
-        coracoes.push(new NPC_estatico({ x: cellSize * 11, y: 20 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx }));
-        coracoes.push(new NPC_estatico({ x: cellSize * 13, y: 6 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx }));
-        coracoes.push(new NPC_estatico({ x: cellSize * 2, y: 11 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx }));
+        mapa.coracoes.length = 0;
+        mapa.respawnCoracoes();
+        /*
+        mapa.coracoes.push(new NPC_estatico({ x: cellSize * 11, y: 20 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx }));
+        mapa.coracoes.push(new NPC_estatico({ x: cellSize * 13, y: 6 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx }));
+        mapa.coracoes.push(new NPC_estatico({ x: cellSize * 2, y: 11 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx }));
+        */
         //Volta a posição do respawn pro inicio do mapa, e chama o respawn
         posicao_x = 1 * cellSize;
         posicao_y = 1 * cellSize;

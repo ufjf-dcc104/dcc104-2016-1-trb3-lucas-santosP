@@ -30,8 +30,13 @@ Map.prototype.setFase = function (L) {
     this.K = L;
     this.criaFase();
 }
-Map.prototype.respawnCoracoes =function(){
-
+Map.prototype.respawnNPCs =function(){
+    for (const i in this.checkPoints) {
+        this.checkPoints[i].ativo = false;
+    }
+    for (const i in this.coracoes) {
+        this.coracoes[i].ativo = true;
+    }
 }
 Map.prototype.criaFase = function () {
     this.cells.length = 0;
@@ -44,6 +49,7 @@ Map.prototype.criaFase = function () {
     this.serrasCirculares.length = 0;
     this.checkPoints.length = 0;
     this.coracoes.length = 0;
+    this.totalPts=0;
 
     for (var c = 0; c < this.COLUMNS; c++) {
         this.cells[c] = [];
@@ -115,7 +121,8 @@ Map.prototype.criaFase = function () {
                     case 6:
                         this.coracoes.push(new NPC_estatico({ 
                             x: c * this.SIZE,
-                            y: l * this.SIZE, 
+                            y: l * this.SIZE,
+                            ativo: true,
                             assets: this.assets, mapa: this, ctx: this.ctx
                         }));
                         break;
@@ -162,9 +169,13 @@ Map.prototype.render = function () {
                     this.ctx.drawImage(this.assets.img('chao_inicial'), c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
                     break;
             }
+            this.ctx.font = "10px verdana";
+            //this.ctx.fillText("["+c+","+l+"]", this.SIZE*c, this.SIZE*l+16);
         }
     }
 }
-Map.prototype.clearMap = function (caminho) {
-    this.cells[caminho.c][caminho.l].tipo = 0;
+Map.prototype.clearMap = function (caminhos) {
+    for(const i in caminhos){
+        this.cells[caminhos[i].c][caminhos[i].l].tipo = 0;
+    }
 }

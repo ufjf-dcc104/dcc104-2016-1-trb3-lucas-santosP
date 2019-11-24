@@ -17,8 +17,9 @@ var mapa2;
 	assetsMng.loadAudio("pickSound", "assets/sounds/pick.mp3");
 	assetsMng.loadAudio("hitSound", "assets/sounds/death-sound-effect.mp3");
 	assetsMng.loadAudio("checkSound", "assets/sounds/checkpointSound.mp3");
-	var mainOST = new Audio('assets/sounds/OST-small.mp3');
-	var playPromise;
+	assetsMng.loadAudio("soundTrack", "assets/sounds/OST-menor.mp3");
+	assetsMng.loadAudio("soundGameOver", "assets/sounds/Game-Over.mp3");
+	assetsMng.loadAudio("soundWin", "assets/sounds/win.mp3");
 
 	var cellSize = 32;
 	var mapa = new Map({
@@ -30,21 +31,21 @@ var mapa2;
 		m: [
 			[
 				[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-				[1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {tipo: -4, vx: 3.8, vy: 3.8}, 0, 0, 0, 1],
+				[1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, { tipo: -4, vx: 3.8, vy: 3.8 }, 0, 0, 0, 1],
 				[1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1],
-				[1, 0, 1, 0, 1, {tipo: 4, vx: 2, direcao: 'x'}, 0, 0, { tipo: 4, vy: 1, direcao: 'y' }, 0, 0, 0, 1, { tipo: 4, vx: 2, direcao: 'x' }, 0, 0, 0, 0, 0, 1, 1, 1, 1, {tipo: 4, vy: 1.2, direcao: 'y'}, 1, 0, 1, 1, 0, 1],
-				[1, {tipo: 4, vx: 1.3, direcao: 'x'}, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 5, 0, 1, 0, 0, 0, 0, 1],
-				[1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, { tipo: 4, vy: 2, direcao: 'y' }, 1, {tipo: 4, vy: 2, direcao: 'y'}, 0, 0, 0, 0, 0, { tipo: 4, vx: 2, direcao: 'x' }, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1],
-				[1, {tipo: 4, vx: 3, direcao: 'x'}, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, {tipo: 4, vx: 2, direcao: 'x'}, 0, 0, 0, 0, {tipo: 4, vy: 2.8, direcao: 'y'}, 1],
-				[1, 0, 1, 0, 1, 0, 0, 0, 0, {tipo: -4, vx: 0.6, vy: 3.8}, 0, 0, 1, {tipo: 4, vx: 3.5, direcao: 'x' }, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
+				[1, 0, 1, 0, 1, { tipo: 4, vx: 2, direcao: 'x' }, 0, 0, { tipo: 4, vy: 1, direcao: 'y' }, 0, 0, 0, 1, { tipo: 4, vx: 2, direcao: 'x' }, 0, 0, 0, 0, 0, 1, 1, 1, 1, { tipo: 4, vy: 1.2, direcao: 'y' }, 1, 0, 1, 1, 0, 1],
+				[1, { tipo: 4, vx: 1.3, direcao: 'x' }, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 5, 0, 1, 0, 0, 0, 0, 1],
+				[1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, { tipo: 4, vy: 2, direcao: 'y' }, 1, { tipo: 4, vy: 2, direcao: 'y' }, 0, 0, 0, 0, 0, { tipo: 4, vx: 2, direcao: 'x' }, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1],
+				[1, { tipo: 4, vx: 3, direcao: 'x' }, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, { tipo: 4, vx: 2, direcao: 'x' }, 0, 0, 0, 0, { tipo: 4, vy: 2.8, direcao: 'y' }, 1],
+				[1, 0, 1, 0, 1, 0, 0, 0, 0, { tipo: -4, vx: 0.6, vy: 3.8 }, 0, 0, 1, { tipo: 4, vx: 3.5, direcao: 'x' }, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
 				[1, 0, 1, 0, 1, 0, 1, 0, 1, 3, 3, 3, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1],
-				[1, {tipo: 4, vx: 2, direcao: 'x'}, 0, 0, 0, 0, 1, 0, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+				[1, { tipo: 4, vx: 2, direcao: 'x' }, 0, 0, 0, 0, 1, 0, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
 				[1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-				[1, 0, 6, 1, 0, {tipo: -4, vx: 3.4, vy: 3.4}, 3, 0, 1, 0, 3, 0, 3, 0, 0, 0, 0, {tipo: 4, vy: 2, direcao: 'y'}, 1, 0, 6, {tipo: -4, vx: 3.3, vy: 3.3}, 1, 0, 5, {tipo: 4, vy: 3.5, direcao: 'y'}, 1, 1, 0, 1],
+				[1, 0, 6, 1, 0, { tipo: -4, vx: 3.4, vy: 3.4 }, 3, 0, 1, 0, 3, 0, 3, 0, 0, 0, 0, { tipo: 4, vy: 2, direcao: 'y' }, 1, 0, 6, { tipo: -4, vx: 3.3, vy: 3.3 }, 1, 0, 5, { tipo: 4, vy: 3.5, direcao: 'y' }, 1, 1, 0, 1],
 				[1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 3, 0, 3, 0, 0, 0, 0, 0, 1, 0, 3, 0, 3, 0, 1, 0, 0, 3, 0, 1],
 				[1, 0, 1, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
 				[1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 3, 0, 1],
-				[1, 0, 1, 1, 0, 0, 3, 0, 1, {tipo: -4, vx: 3.3, vy: 3.3}, 0, 0, 0, 0, 0, 0, 1, 0, 1, 3, 3, 3, 3, 0, 3, 0, 1, 1, 0, 1],
+				[1, 0, 1, 1, 0, 0, 3, 0, 1, { tipo: -4, vx: 3.3, vy: 3.3 }, 0, 0, 0, 0, 0, 0, 1, 0, 1, 3, 3, 3, 3, 0, 3, 0, 1, 1, 0, 1],
 				[1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 1],
 				[1, 0, 3, 0, 1, 0, 3, 0, 1, 0, 1, 0, 6, 0, 1, 0, 1, 0, 3, 0, 3, 3, 3, 3, 1, 0, 1, 1, 0, 1],
 				[1, { tipo: 4, vy: 2.5, direcao: 'y' }, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 1],
@@ -82,14 +83,14 @@ var mapa2;
 	mapa2 = mapa;
 
 	var pc = new Sprite({ x: 32 + 8, y: 32, assets: assetsMng, mapa: mapa, ctx: ctx });
-	var explosao = new NPC_estatico({ x: cellSize * 21, y: 5 * cellSize, assets: assetsMng, mapa: mapa, ctx: ctx });
+	var explosao = new NPC_estatico({assets: assetsMng, mapa: mapa, ctx: ctx });
 
 	var dt = 0; var anterior = 0;
 	var alive; var hit = false;
 	var vidas; var pontos;
 	var recorde = 0;
 	var jogando = false;
-	const totalPontos = mapa.totalPts;
+	const totalPontos = 4;
 	//Posição do respawn do pc
 	var posicao_x = 1 * cellSize;
 	var posicao_y = 1 * cellSize;
@@ -100,9 +101,9 @@ var mapa2;
 	document.querySelector('canvas').addEventListener("click", function _listener() {
 		document.querySelector('canvas').removeEventListener("click", _listener, true);
 		jogando = true;
-		playOST(mainOST);
+		assetsMng.PlayOST("soundTrack",0.1, true);
 	}, true);
-
+	var tocando=false;
 	//FUNÇÕES PRINCIPAIS ==================================================================================
 	function loop(t) {
 		dt = (t - anterior) / 1000;
@@ -112,7 +113,7 @@ var mapa2;
 			desenha_menu_inicial();
 		}
 		else {
-			if (vidas == 0) { //Se acabou as vidas
+			if (vidas == 0) { //Se acabou as vidas	
 				gameOver();
 			}
 			else if (alive) { //Se esta vivo, roda o jogo
@@ -172,11 +173,11 @@ var mapa2;
 			}
 		}
 		for (const i in mapa.coracoes) { //Colisão com corações
-			if(mapa.coracoes[i].ativo){
+			if (mapa.coracoes[i].ativo) {
 				if (mapa.coracoes[i].colidiuCom(pc)) {
 					//mapa.coracoes.splice(i, 1);
 					assetsMng.playSoundEffect("pickSound", 1, false);
-					mapa.coracoes[i].ativo=false;
+					mapa.coracoes[i].ativo = false;
 					if (vidas < 3)
 						vidas++;
 					break;
@@ -185,8 +186,8 @@ var mapa2;
 		}
 		for (const i in mapa.checkPoints) {  //Colisão com checkpoint
 			if (mapa.checkPoints[i].colidiuCom(pc)) {
-				if (!mapa.checkPoints[i].ativo) { 
-					assetsMng.playSoundEffect("checkSound", 0.3, false); 
+				if (!mapa.checkPoints[i].ativo) {
+					assetsMng.playSoundEffect("checkSound", 0.3, false);
 				}
 				mapa.checkPoints[i].ativo = true;
 				posicao_y = mapa.checkPoints[i].y;
@@ -217,7 +218,7 @@ var mapa2;
 			mapa.checkPoints[i].renderCheck(dt);
 		}
 		for (const i in mapa.coracoes) { //Desenha corações
-			if(mapa.coracoes[i].ativo){
+			if (mapa.coracoes[i].ativo) {
 				mapa.coracoes[i].renderHeart(dt);
 			}
 		}
@@ -341,9 +342,9 @@ var mapa2;
 	}
 
 	function restart() { //Volta todas variaveis (necessarias) para o estado inicial do jogo.
-		vidas = 3;
+		vidas = 1;
 		pontos = 0;
-		
+
 		mapa.clearMap(pc.caminhos);//Apaga o caminho colorido pelo jogador
 		pc.caminhos.length = 0;
 		mapa.respawnNPCs(); //Volta as condições "ativo" do checkpoint e corações
@@ -354,7 +355,9 @@ var mapa2;
 	}
 
 	function gameOver() {
-		pauseOST(mainOST);
+		assetsMng.PlayOST("soundGameOver", 0.1, false);
+		assetsMng.PauseOST("soundTrack");
+
 		ctx.globalAlpha = 0.2;
 		ctx.fillStyle = "black";
 		ctx.fillRect(32, 32, cnv.width - 64, cnv.height - 64);
@@ -377,13 +380,18 @@ var mapa2;
 		ctx.fillText("PLAY", (cnv.width / 2) - 50, (cnv.height / 2) + 115);
 		document.querySelector('canvas').addEventListener("click", function _listener() {
 			document.querySelector('canvas').removeEventListener("click", _listener, true);
-			playOST(mainOST);
-			restart();
+			if (vidas == 0) {
+				assetsMng.PauseOST("soundGameOver");
+				assetsMng.PlayOST("soundTrack", 0.1, true);
+				restart();
+			}
 		}, true);
 	}
 	//Se juntou todos os pontos
 	function venceu() {
-		pauseOST(mainOST);
+		//assetsMng.PlayOST("soundWin", 0.0, false);
+		assetsMng.PauseOST("soundTrack");
+		
 		ctx.globalAlpha = 0.2;
 		ctx.fillStyle = "black";
 		ctx.fillRect(32, 32, cnv.width - 64, cnv.height - 64);
@@ -406,8 +414,12 @@ var mapa2;
 
 		document.querySelector('canvas').addEventListener("click", function _listener() {
 			document.querySelector('canvas').removeEventListener("click", _listener, true);
-			playOST(mainOST);
-			restart();
+			if(pontos == totalPontos){	
+				//assetsMng.PauseOST("soundWin");
+				assetsMng.PlayOST("soundTrack",0.1, true);
+				restart();
+			}
+				
 		}, true);
 
 	}
@@ -448,26 +460,6 @@ var mapa2;
 			5, 4,
 			54, 17,
 		);
-	}
-	var cond = false;
-	function playOST(ost) {
-		if(!cond){
-			playPromise = ost.play();
-			if (playPromise !== undefined) {
-				playPromise.then(_ => {
-					ost.play();
-					ost.volume = 0.1;
-					ost.loop = true;
-					cond=true;
-				});
-			}
-		}
-	}
-
-	function pauseOST(ost) {
-		ost.pause();
-		ost.load();
-		cond=false;
 	}
 
 	//CONTROLES

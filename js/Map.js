@@ -27,6 +27,7 @@ function Map(modelo) {
 }
 
 Map.prototype.setFase = function(L) {
+  //this.K = this.K++; //para proxima fase
   this.K = L;
   this.criaFase();
 };

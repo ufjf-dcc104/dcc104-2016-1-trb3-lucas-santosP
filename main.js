@@ -8,11 +8,14 @@ var teclas = {
 	direita: false, baixo: false,
 };
 var espaco = false;
+var enter = false;
 var assetsMng = new AssetsManager();
 assetsMng.loadImage("chao_inicial", "assets/imgs/chao1.png");
 assetsMng.loadImage("chao_final", "assets/imgs/chao2.png");
 assetsMng.loadImage("background", "assets/imgs/background-2.png");
 assetsMng.loadImage("pack", "assets/imgs/all_imgs.png");
+assetsMng.loadImage("menu-select", "assets/imgs/menu-select.png");
+assetsMng.loadImage("menu-noSelect", "assets/imgs/menu-noSelect2.png");
 //audios
 assetsMng.loadAudio("pickSound", "assets/sounds/pick.mp3");
 assetsMng.loadAudio("hitSound", "assets/sounds/death-sound-effect.mp3");
@@ -96,23 +99,10 @@ var cooldown;
 //Posição do respawn do pc
 var posicao_x = 1 * cellSize;
 var posicao_y = 1 * cellSize;
-
+var game_state;
 //MAIN ================================================================================================
 //restart();  //Inicializa variaveis
-ctx.globalAlpha = 1;
-ctx.fillStyle = "black";
-ctx.fillRect(0, 0, cnv.width, cnv.height);
-ctx.font = "30px ARIAL";
-ctx.fillStyle = "white";
-ctx.lineWidth = 2;
-ctx.fillText("Click on canvas to start the game!", (cnv.width / 2) - 200, (cnv.height / 2) + 90);
-
-//style.backgroundColor = "black";
-document.querySelector('canvas').addEventListener("click", function _listener() {
-	document.querySelector('canvas').removeEventListener("click", _listener, true);
-	document.querySelector("#div_cnv").classList.add("bg-custom");
-	requestAnimationFrame(loop);
-}, true);
+inicializacao();
 //FUNÇÕES PRINCIPAIS ==================================================================================
 function loop(t) {
 	dt = (t - anterior) / 1000;
@@ -318,25 +308,60 @@ function colisãoComParedes() {
 }
 
 //OUTRAS FUNÇÕES ================================================
+var selectY = 500;
+var cor_play = "white", cor_tutorial = "black";
+var retorno_Menu = "";
+
 function desenha_menu_inicial() {
 	restart();  //Inicializa variaveis
 	ctx.drawImage(assetsMng.img("background"), 0, 0, cnv.width, cnv.height);
-	ctx.font = "30px arial"; ctx.fillStyle = "white";
-	ctx.fillText("CLIQUE PARA COMEÇAR", cnv.width / 2 - 170, 680);
 
-	ctx.lineWidth = 2;
-	ctx.strokeStyle = "white"; ctx.fillStyle = 'blue';
-	ctx.fillRect((cnv.width / 2) - 90, (cnv.height / 2) + 230, 180, 40);
-	ctx.strokeRect((cnv.width / 2) - 90, (cnv.height / 2) + 230, 180, 40);
-	ctx.fillStyle = "white";
-	ctx.font = "40px arial  ";
-	ctx.fillText("PLAY", (cnv.width / 2) - 50, (cnv.height / 2) + 265);
-	if (!jogando) {
-		document.querySelector('canvas').addEventListener("click", function _listener() {
-			document.querySelector('canvas').removeEventListener("click", _listener, true);
+	var estado_menu = desenhaMenu();
+	switch (estado_menu) {
+		case 'play':
+			console.log("play!");
 			jogando = true;
 			assetsMng.PlayOST("soundTrack", 0.1, true);
-		}, true);
+			break;
+		case 'tutorial':
+			console.log("tutorial!");
+			break;
+		default:
+			console.log("nada!");
+			break;
+	}
+}
+function desenhaMenu() {
+	ctx.font = "30px arial";
+	ctx.drawImage(assetsMng.img("menu-noSelect"), (cnv.width / 2) - 155, 500, 300, 60);
+	ctx.drawImage(assetsMng.img("menu-noSelect"), (cnv.width / 2) - 155, 600, 300, 60);
+
+	if (teclas.baixo) {
+		selectY = 600;
+		cor_play = "black";
+		cor_tutorial = "white"
+		ctx.drawImage(assetsMng.img("menu-select"), (cnv.width / 2) - 155, selectY, 300, 60);
+		retorno_Menu = "tutorial";
+	}
+	else if (teclas.cima) {
+		selectY = 500;
+		cor_play = "white";
+		cor_tutorial = "black"
+		ctx.drawImage(assetsMng.img("menu-select"), (cnv.width / 2) - 155, selectY, 300, 60);
+		retorno_Menu = "play";
+	}
+	else {
+		ctx.drawImage(assetsMng.img("menu-select"), (cnv.width / 2) - 155, selectY, 300, 60);
+	}
+
+	ctx.fillStyle = cor_play;
+	ctx.fillText("PLAY", (cnv.width / 2) - 45, 540);
+	ctx.fillStyle = cor_tutorial;
+	ctx.fillText("TUTORIAL", (cnv.width / 2) - 85, 640);
+
+	if (enter) {
+		console.log("returning: " + retorno_Menu);
+		return retorno_Menu;
 	}
 }
 
@@ -469,7 +494,24 @@ function desenhaHUD() {
 		54, 17,
 	);
 }
+function inicializacao() {
+	game_state = "menu";
+	ctx.globalAlpha = 1;
+	ctx.fillStyle = "black";
+	ctx.fillRect(0, 0, cnv.width, cnv.height);
+	ctx.font = "30px ARIAL";
+	ctx.fillStyle = "white";
+	ctx.lineWidth = 2;
+	ctx.fillText("Click on canvas to start the game!", (cnv.width / 2) - 200, (cnv.height / 2) + 90);
 
+	//style.backgroundColor = "black";
+	document.querySelector('canvas').addEventListener("click", function _listener() {
+		document.querySelector('canvas').removeEventListener("click", _listener, true);
+		document.querySelector("#div_cnv").classList.add("bg-custom");
+		requestAnimationFrame(loop);
+
+	}, true);
+}
 //CONTROLES
 window.addEventListener("keydown", function (e) {
 	switch (e.keyCode) {
@@ -487,6 +529,9 @@ window.addEventListener("keydown", function (e) {
 			break;
 		case 37:
 			espaco = true;
+			break;
+		case 13:
+			enter = true;
 			break;
 		default:
 			break;
@@ -508,6 +553,9 @@ window.addEventListener("keyup", function (e) {
 			break;
 		case 37:
 			espaco = false;
+			break;
+		case 13:
+			enter = false;
 			break;
 		default:
 			break;

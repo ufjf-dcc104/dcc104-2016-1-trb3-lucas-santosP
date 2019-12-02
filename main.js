@@ -361,17 +361,18 @@ function restart_menu() {
 	selecter.y = 500;
 }
 function desenha_menu_inicial() {
-	restart();  //Inicializa variaveis
 	ctx.drawImage(assetsMng.img("background"), 0, 0, cnv.width, cnv.height);
 
 	switch (estado_menu) {
 		case 'play':
+			restart();  //Inicializa variaveis
 			assetsMng.PlayOST("soundTrack", 0.1, true);
 			faseAtual = 1;
 			mapa.setFase(faseAtual);
 			game_state = "playing";
 			break;
 		case 'tutorial':
+			restart();  //Inicializa variaveis
 			assetsMng.PlayOST("soundTrack", 0.1, true);
 			faseAtual = 0;
 			mapa.setFase(faseAtual);
@@ -458,6 +459,7 @@ function restart() { //Volta todas variaveis (necessarias) para o estado inicial
 	vidas = 3;
 
 	mapa.m = addFases();//Retorna o modelo inicial de fase
+	faseAtual = 1;
 	mapa.setFase(faseAtual);//Altera a fase
 	totalPontos = mapa.totalPts * 10;
 	pontos = 0;
@@ -536,7 +538,6 @@ function venceu() {
 				assetsMng.PauseOST("soundWin");
 				assetsMng.PlayOST("soundTrack", 0.1, true);
 				cooldown = 0.5;
-				faseAtual = 1;
 				restart();
 				game_state = "playing"
 			}, true);

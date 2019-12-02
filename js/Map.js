@@ -23,15 +23,14 @@ function Map(modelo) {
     coracoes: []
   };
   Object.assign(this, exemplo, modelo);
-  this.criaFase();
 }
 
-Map.prototype.setFase = function(L) {
+Map.prototype.setFase = function (L) {
   //this.K = this.K++; //para proxima fase
   this.K = L;
   this.criaFase();
 };
-Map.prototype.respawnNPCs = function() {
+Map.prototype.respawnNPCs = function () {
   for (const i in this.checkPoints) {
     this.checkPoints[i].ativo = false;
   }
@@ -39,7 +38,7 @@ Map.prototype.respawnNPCs = function() {
     this.coracoes[i].ativo = true;
   }
 };
-Map.prototype.criaFase = function() {
+Map.prototype.criaFase = function () {
   this.cells.length = 0;
   this.walls00.length = 0;
   this.walls10.length = 0;
@@ -99,6 +98,7 @@ Map.prototype.criaFase = function() {
             );
             break;
           case 4: //Serras lineares
+            this.totalPts++;
             this.serrasLineares.push(
               new NPC({
                 x: c * this.SIZE,
@@ -113,6 +113,7 @@ Map.prototype.criaFase = function() {
             );
             break;
           case -4: //Serras circulares
+            this.totalPts++;
             this.serrasCirculares.push(
               new NPC({
                 x: c * this.SIZE,
@@ -159,7 +160,7 @@ Map.prototype.criaFase = function() {
   }
 };
 
-Map.prototype.render = function() {
+Map.prototype.render = function () {
   for (var c = 0; c < this.COLUMNS; c++) {
     for (var l = 0; l < this.LINES; l++) {
       switch (this.cells[c][l].tipo) {
@@ -224,7 +225,7 @@ Map.prototype.render = function() {
     }
   }
 };
-Map.prototype.clearMap = function(caminhos) {
+Map.prototype.clearMap = function (caminhos) {
   for (const i in caminhos) {
     this.cells[caminhos[i].c][caminhos[i].l].tipo = 0;
   }

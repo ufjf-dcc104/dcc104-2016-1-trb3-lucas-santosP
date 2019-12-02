@@ -13,29 +13,29 @@ function AssetsManager() {
     };
   }
 }
-AssetsManager.prototype.loadImage = function(key, url) {
+AssetsManager.prototype.loadImage = function (key, url) {
   //console.log(`Carregando imagem ${url}...`);
   this.aCarregar++;
   var imagem = new Image();
   imagem.src = url;
   this.images[key] = imagem;
   var that = this;
-  imagem.addEventListener("load", function() {
+  imagem.addEventListener("load", function () {
     that.carregadas++;
     //console.log(`Imagem ${that.carregadas}/${that.aCarregar} ${key}: ${url} carregada.`);
   });
 };
-AssetsManager.prototype.img = function(key) {
+AssetsManager.prototype.img = function (key) {
   return this.images[key];
 };
 
-AssetsManager.prototype.progresso = function() {
+AssetsManager.prototype.progresso = function () {
   if (this.aCarregar != 0) {
     return (this.carregadas / this.aCarregar) * 100.0;
   } else return 0.0;
 };
 
-AssetsManager.prototype.loadAudio = function(key, url) {
+AssetsManager.prototype.loadAudio = function (key, url) {
   //console.log(`Carregando audio ${key}: ${url}...`);
   var audio = new Audio();
   audio.src = url;
@@ -44,7 +44,7 @@ AssetsManager.prototype.loadAudio = function(key, url) {
   this.audios[key].audio.pause();
 };
 
-AssetsManager.prototype.playSoundEffect = function(key, volume, loop_cond) {
+AssetsManager.prototype.playSoundEffect = function (key, volume, loop_cond) {
   if (!this.audios[key].audio) {
     throw new Error(`Chave de audio inválida: ${key}!`);
   } else {
@@ -63,7 +63,7 @@ AssetsManager.prototype.playSoundEffect = function(key, volume, loop_cond) {
   }
 };
 
-AssetsManager.prototype.PauseOST = function(key) {
+AssetsManager.prototype.PauseOST = function (key) {
   if (!this.audios[key].audio) {
     throw new Error(`Chave de audio inválida: ${key}!`);
   } else {
@@ -72,7 +72,7 @@ AssetsManager.prototype.PauseOST = function(key) {
     this.audios[key].audio.load();
   }
 };
-AssetsManager.prototype.PlayOST = function(key, volume, loop_cond) {
+AssetsManager.prototype.PlayOST = function (key, volume, loop_cond) {
   if (!this.audios[key].audio) {
     throw new Error(`Chave de audio inválida: ${key}!`);
   } else if (!this.audios[key].isPlaying) {

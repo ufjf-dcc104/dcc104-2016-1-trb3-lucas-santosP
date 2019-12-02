@@ -77,6 +77,16 @@ NPC.prototype.mover = function () {
         }
     }
 }
+
+NPC.prototype.moverMenu = function (direcao) {
+    if (direcao == "-" && this.y > 500)
+        this.y = this.y - 100;
+    else if (direcao == "+" && this.y <= 500)
+        this.y = this.y + 100;
+}
+NPC.prototype.desenharMenu = function () {
+    ctx.drawImage(assetsMng.img("menu-select"), this.x, this.y, 300, 60);
+}
 NPC.prototype.colidiuCom = function (alvo) {
     // + e - numeros para dar uma margem a mais para colisão
     if (alvo.x + alvo.w - 5 < this.x) return false;

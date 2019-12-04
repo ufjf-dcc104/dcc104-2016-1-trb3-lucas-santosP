@@ -26,7 +26,6 @@ function Map(modelo) {
 }
 
 Map.prototype.setFase = function (L) {
-  //this.K = this.K++; //para proxima fase
   this.K = L;
   this.criaFase();
 };
@@ -75,13 +74,16 @@ Map.prototype.criaFase = function () {
               w: this.SIZE,
               h: this.SIZE
             };
-            if (c < 15 && l < 11) {
+            if (c <= 15 && l <= 11) {
               this.walls00.push(parede);
-            } else if (c >= 15 && l < 11) {
+            }
+            if (c >= 15 && l <= 11) {
               this.walls10.push(parede);
-            } else if (c < 15 && l >= 11) {
+            }
+            else if (c <= 15 && l >= 11) {
               this.walls01.push(parede);
-            } else {
+            }
+            if (c >= 15 && l <= 11) {
               this.walls11.push(parede);
             }
             break;
@@ -127,6 +129,7 @@ Map.prototype.criaFase = function () {
             );
             break;
           case 5:
+            this.totalPts++;
             this.checkPoints.push(
               new NPC_estatico({
                 x: c * this.SIZE,
@@ -140,6 +143,7 @@ Map.prototype.criaFase = function () {
             );
             break;
           case 6:
+            this.totalPts++;
             this.coracoes.push(
               new NPC_estatico({
                 x: c * this.SIZE,

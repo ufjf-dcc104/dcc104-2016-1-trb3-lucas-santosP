@@ -45,9 +45,9 @@ function addFases() {
 			[1, 5, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 			[1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 			[1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 1, 0, 0, 0, 0, 0, 0, { tipo: 4, vx: 2, direcao: 'x' }, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-			[1, 1, 1, 6, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 0, 0, 0, 6, 0, 0, { tipo: 4, vx: 2, direcao: 'x' }, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 3, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 3, 3, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -62,6 +62,78 @@ function addFases() {
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+		],
+		[
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 5, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 0, 3, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 3, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+		],
+		[
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1],
+			[1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 1],
+			[1, 1, 1, 1, 0, 1, 1, 1, 3, 3, 3, 3, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 1],
+			[1, 1, 1, 1, 0, 1, 0, 5, 0, 0, 0, 0, 0, 1, 0, 3, 3, 0, 3, 3, 3, 3, 3, 0, 3, 0, 3, 0, 3, 1],
+			[1, 1, 1, 1, 0, 1, 0, 1, 3, 3, 3, 3, 0, 1, 0, 3, 3, 0, 3, 0, 0, 0, 0, 6, 3, 0, 3, 0, 3, 1],
+			[1, 1, 1, 1, 0, 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 3, 3, 3, 3, 3, 0, 3, 0, 3, 1],
+			[1, 1, 1, 1, 0, 3, 0, 3, 0, 3, 3, 3, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1],
+			[1, 1, 1, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 0, 1, 5, 0, 3, 3, 3, 3, 3, 3, 3, 0, 3, 0, 3, 1],
+			[1, 1, 1, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+		],
+		[
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 1],
+			[1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1],
+			[1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 3, 3, 3, 3, 3, 0, 3, 0, 3, 0, 1],
+			[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 3, 0, 0, 0, 0, 0, 3, 0, 3, 0, 1],
+			[1, 0, 1, 6, 5, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 3, 0, 3, 3, 3, 3, 3, 0, 3, 0, 1],
+			[1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1],
+			[1, 0, 1, 1, 0, 1, 0, 1, 0, 3, 3, 3, 0, 1, 0, 1, 0, 1, 0, 3, 3, 3, 3, 3, 3, 3, 0, 3, 0, 1],
+			[1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+			[1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, { tipo: 4, vx: 3.5, direcao: 'x' }, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, { tipo: 4, vx: 3.5, direcao: 'x' }, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, { tipo: 4, vx: 2.8, direcao: 'x' }, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, { tipo: 4, vx: 3, direcao: 'x' }, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, { tipo: 4, vx: 2.8, direcao: 'x' }, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+			[1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, { tipo: 4, vx: 3, direcao: 'x' }, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 			[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		],
 		[
@@ -97,9 +169,8 @@ var explosao = new NPC_estatico({ assets: assetsMng, mapa: mapa, ctx: ctx });
 var game_state;
 var alive, hit;
 var faseAtual = 0;
-var pause = false;
 var dt = 0, anterior = 0;
-var vidas, pontos, totalPontos;
+var vidas, totalPontos;
 var cooldown = 0.5, cooldown_menu = 0.5;
 //Posição do respawn do pc
 var posicao_x = 1 * cellSize;
@@ -126,22 +197,20 @@ function loop(t) {
 		case "tutorial":
 			if (!hit) {
 				update(dt);
-				render();
-				pontos = pc.caminhos.length * 10;//Atualiza os pontos
+				render(dt);
 			}
 			else {
-				render();
+				render(dt);
 				hited();//Desenha e toca som do hit
 
 				cooldown = cooldown - 0.3 * dt;
 				if (cooldown <= 0) {
 					assetsMng.PauseOST("hitSound");
-					cooldown = 0.5;
 					vidas--;
 					if (vidas == 0) {
 						vidas = 3;
 					}
-					respawn();//Volta hit para false
+					respawn();//Volta hit para false, e cooldown para 0.5
 				}
 			}
 			desenhaHUD();
@@ -149,44 +218,46 @@ function loop(t) {
 			break;
 
 		case "playing":
-			if (!hit) {
-				if (!pause) {
-					update(dt);
-				}
-				render();
-				pontos = pc.caminhos.length * 10;//Atualiza os pontos
-				if (pontos == totalPontos) {//Se coletou todos os pontos
-					game_state = "win";
-				}
+			if (!hit) {//Se não tomou dano
+				update(dt);
+				render(dt);
 			}
 			else {
-				render();
+				render(dt);
 				hited();//Desenha e toca som do hit
 
 				cooldown = cooldown - 0.3 * dt;
 				if (cooldown <= 0) {
 					assetsMng.PauseOST("hitSound");
-					cooldown = 0.5;
 					vidas--;
-					//desenhaHUD();
 					if (vidas == 0) {
 						game_state = "gameOver";
 					}
-					respawn();//Volta hit para false
+					respawn();//Volta hit para false, e cooldown para 0.5
+				}
+			}
+			//Se venceu
+			if (pc.pontos == mapa.totalPts) {//Se coletou todos os pontos
+				cooldown = cooldown - 1 * dt;
+				if (cooldown <= 0) {
+					cooldown = 0.5;
+					faseAtual++;
+					game_state = "win";
 				}
 			}
 			desenhaHUD();
 			break;
 		case "gameOver":
-			gameOver();
+			gameOver(dt);
 			break;
 		case "win":
-			venceu();
+			venceu(dt);
 			break;
 
 		default:
 			break;
 	}
+
 	//desenha FPS
 	ctx.fillStyle = "white";
 	ctx.font = "18px verdana";
@@ -243,7 +314,7 @@ function update() {
 	}
 }
 
-function render() {
+function render(dt) {
 	ctx.clearRect(0, 0, cnv.width, cnv.height);
 	mapa.render();
 
@@ -387,12 +458,12 @@ function desenha_menu_inicial() {
 }
 function menu_selector() {
 	if (teclas.baixo) {
-		assetsMng.playSoundEffect("select-sound", 0.1, false);
+		assetsMng.playSoundEffect("select-sound", 0.03, false);
 		selecter.moverMenu("+");
 		cor_play = "black"; cor_tutorial = "white"
 	}
 	else if (teclas.cima) {
-		assetsMng.playSoundEffect("select-sound", 0.1, false);
+		assetsMng.playSoundEffect("select-sound", 0.03, false);
 		selecter.moverMenu("-");
 		cor_play = "white"; cor_tutorial = "black"
 	}
@@ -427,7 +498,6 @@ function desenha_menu_tutorial() {
 	ctx.drawImage(assetsMng.img("menu-select"), (cnv.width / 2) - 150, 635, 300, 60);
 	ctx.font = "30px arial";
 	ctx.fillText("Voltar", (cnv.width / 2) - 40, 675);
-
 	ctx.drawImage(assetsMng.img("tuto-text"), (cnv.width / 2) - 400, 380, 800, 250);
 
 	cooldown_menu = cooldown_menu - 1.2 * dt;
@@ -450,32 +520,29 @@ function hited() {
 	explosao.renderDeath(dt);
 }
 function respawn() {
+	cooldown = 0.5;
 	hit = false;
-	pc.x = posicao_x + 6;
+	pc.x = posicao_x;
 	pc.y = posicao_y;
 }
 function restart() { //Volta todas variaveis (necessarias) para o estado inicial do jogo.
-	pause = false;
 	vidas = 3;
-
 	mapa.m = addFases();//Retorna o modelo inicial de fase
-	faseAtual = 1;
 	mapa.setFase(faseAtual);//Altera a fase
-	totalPontos = mapa.totalPts * 10;
-	pontos = 0;
 
 	//mapa.clearMap(pc.caminhos);//Apaga o caminho colorido pelo jogador
-	pc.caminhos.length = 0;
+	pc.pontos = 0;
 	mapa.respawnNPCs(); //Volta as condições "ativo" do checkpoint e corações
 	//Volta a posição do respawn pro inicio do mapa, e chama o respawn
-	posicao_x = 1 * cellSize;
-	posicao_y = 1 * cellSize;
+	posicao_x = 38;
+	posicao_y = 32;
 	respawn();
 }
 
-function gameOver() {
+function gameOver(dt) {
 	assetsMng.PlayOST("soundGameOver", 0.1, false);
 	assetsMng.PauseOST("soundTrack");
+	faseAtual = 1;
 
 	ctx.globalAlpha = 0.2;
 	ctx.fillStyle = "black";
@@ -486,43 +553,40 @@ function gameOver() {
 	ctx.font = "100px bold sans-serif";
 	ctx.fillText("GAME OVER", cnv.width / 2 - 300, cnv.height / 2 - 30);
 
-	ctx.font = "30px bold roboto";
-	ctx.lineWidth = 2;
-	ctx.strokeStyle = "white"; ctx.fillStyle = 'red';
-	ctx.fillRect((cnv.width / 2) - 110, (cnv.height / 2) + 60, 200, 40);
-	ctx.strokeRect((cnv.width / 2) - 110, (cnv.height / 2) + 60, 200, 40);
-	ctx.fillStyle = "white";
-	faseAtual = 0;
-	ctx.fillText("RESTART", (cnv.width / 2) - 70, (cnv.height / 2) + 90);
-	document.querySelector('canvas').addEventListener("click", function _listener() {
-		document.querySelector('canvas').removeEventListener("click", _listener, true);
-		assetsMng.PauseOST("soundGameOver");
-		estado_menu = "selecting";
-		game_state = "menu";
-	}, true);
+	cooldown = cooldown - 0.4 * dt;
+	if (cooldown <= 0) {
+		ctx.font = "30px bold roboto";
+		ctx.lineWidth = 2;
+		ctx.strokeStyle = "white"; ctx.fillStyle = 'red';
+		ctx.fillRect((cnv.width / 2) - 110, (cnv.height / 2) + 60, 200, 40);
+		ctx.strokeRect((cnv.width / 2) - 110, (cnv.height / 2) + 60, 200, 40);
+		ctx.fillStyle = "white";
+		ctx.fillText("RESTART", (cnv.width / 2) - 70, (cnv.height / 2) + 90);
+		if (enter) {
+			assetsMng.PauseOST("soundGameOver");
+			estado_menu = "selecting";
+			game_state = "menu";
+		}
+	}
 }
 
 //Se juntou todos os pontos
-function venceu() {
-	if (!pause) {
-		cooldown = cooldown - 1 * dt;
-		console.log(cooldown);
-	}
+function venceu(dt) {
+	assetsMng.PlayOST("soundWin", 0.1, false);
+	assetsMng.PauseOST("soundTrack");
+	ctx.globalAlpha = 0.5;
+	ctx.fillStyle = "black";
+
+	ctx.fillRect(0, 0, cnv.width, cnv.height);
+	ctx.globalAlpha = 1.0;
+	ctx.fillStyle = "white";
+	ctx.font = "100px bold sans-serif";
+	ctx.fillText("VOCÊ VENCEU!", cnv.width / 2 - 360, cnv.height / 2 - 30);
+	ctx.font = "30px Verdana";
+	ctx.fillStyle = "white";
+
+	cooldown = cooldown - 0.4 * dt;
 	if (cooldown <= 0) {
-		pause = true;
-		assetsMng.PlayOST("soundWin", 0.1, false);
-		assetsMng.PauseOST("soundTrack");
-		ctx.globalAlpha = 0.5;
-		ctx.fillStyle = "black";
-
-		ctx.fillRect(0, 0, cnv.width, cnv.height);
-		ctx.globalAlpha = 1.0;
-		ctx.fillStyle = "white";
-		ctx.font = "100px bold sans-serif";
-		ctx.fillText("VOCÊ VENCEU!", cnv.width / 2 - 360, cnv.height / 2 - 30);
-		ctx.font = "30px Verdana";
-		ctx.fillStyle = "white";
-
 		ctx.font = "30px bold roboto";
 		ctx.lineWidth = 2;
 		ctx.strokeStyle = "white";
@@ -531,16 +595,11 @@ function venceu() {
 		ctx.strokeRect((cnv.width / 2) - 110, (cnv.height / 2) + 60, 200, 40);
 		ctx.fillStyle = "white";
 		ctx.fillText("NEXT STAGE", (cnv.width / 2) - 100, (cnv.height / 2) + 90);
-
-		if (pontos != 0) {
-			document.querySelector('canvas').addEventListener("click", function _listener() {
-				document.querySelector('canvas').removeEventListener("click", _listener, true);
-				assetsMng.PauseOST("soundWin");
-				assetsMng.PlayOST("soundTrack", 0.1, true);
-				cooldown = 0.5;
-				restart();
-				game_state = "playing"
-			}, true);
+		if (enter) {
+			assetsMng.PauseOST("soundWin");
+			assetsMng.PlayOST("soundTrack", 0.1, true);
+			restart();
+			game_state = "playing"
 		}
 	}
 }
@@ -548,18 +607,13 @@ function venceu() {
 function desenhaHUD() {
 	ctx.globalAlpha = 0.8;
 	ctx.fillStyle = "black";
-	ctx.fillRect(0, 0, 175, 25);
-
-	ctx.globalAlpha = 0.7;
-	ctx.fillStyle = 'rgb(195, 195, 195)';
-	ctx.strokeRect(0, 0, 70, 25);
-	ctx.strokeRect(70, 0, 105, 25);
+	ctx.fillRect(0, 0, 65, 25);
 
 	ctx.globalAlpha = 1;
 	ctx.drawImage(assetsMng.img("hud-pontos"), cnv.width - 110, 0, 110, 35);
 	ctx.fillStyle = "white";
 	ctx.font = "20px bold monospaced";
-	ctx.fillText(pontos, cnv.width - 60, 25);
+	ctx.fillText(pc.pontos, cnv.width - 60, 25);
 
 	var heart_Y;
 	switch (vidas) {

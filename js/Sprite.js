@@ -4,7 +4,7 @@ function Sprite(params = {}) {
         h: 25, w: 20,
         vx: 2.3, vy: 2.3,
         mc: 0, my: 0,
-        caminhos: [],
+        pontos: 0,
         assets: undefined,
         mapa: undefined,
         cellsSize: 32,
@@ -21,10 +21,9 @@ Sprite.prototype.render = function (dt) {
     //Desenhando no chão
     var posicao_tipo = this.mapa.cells[this.mc][this.ml].tipo;
     if (posicao_tipo != 1 && posicao_tipo != 3 && posicao_tipo != 2) {
+        this.pontos++;
+        this.assets.playSoundEffect("select-sound", 0.5, false);
         this.mapa.cells[this.mc][this.ml].tipo = 2;
-        var x = { c: this.mc, l: this.ml };
-        this.caminhos.push(x);
-        x = null;
     }
 
     this.frame += 10 * dt;
@@ -105,11 +104,11 @@ Sprite.prototype.mover = function (movimento) {
 
 Sprite.prototype.colisaoMap = function (parede) {
     //Distancia dos objetivos apartir do centro deles
-    var distanciaX = (this.x + this.w / 2) - (parede.x + parede.w / 2);
+    var distanciaX = (this.x + 1 + this.w / 2) - (parede.x + parede.w / 2);
     var distanciaY = (this.y + 4 + this.h / 2) - (parede.y + parede.h / 2);
     //Soma das larguras e alturas dos objetos
     var somaLarguras = (this.w + parede.w) / 2;
-    var somaAlturas = (this.h + parede.h - 10) / 2;
+    var somaAlturas = (this.h + parede.h - 5) / 2;
 
     if (Math.abs(distanciaX) < somaLarguras && Math.abs(distanciaY) < somaAlturas) {
         //sobreposição do pc na parede em X e Y
